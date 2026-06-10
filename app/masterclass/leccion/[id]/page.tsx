@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
@@ -14,6 +15,12 @@ export function generateStaticParams() {
   return LESSONS.map((l) => ({ id: String(l.id) }));
 }
 
+const PHASE_TINT: Record<string, string> = {
+  neon: "var(--neon)",
+  purple: "var(--lilac)",
+  white: "var(--paper-deep)",
+};
+
 export default async function LessonPage({
   params,
 }: {
@@ -28,162 +35,176 @@ export default async function LessonPage({
   const guides = guidesForPhase(lesson.phase);
   const prev = getLesson(lessonId - 1);
   const next = getLesson(lessonId + 1);
-  const accentText =
-    phase.color === "neon"
-      ? "text-brand-neon"
-      : phase.color === "purple"
-        ? "text-brand-purple"
-        : "text-white";
 
   return (
-    <main className="grid-bg min-h-screen">
-      {/* Header */}
-      <header className="border-b-4 border-white">
-        <div className="mx-auto flex max-w-4xl items-center justify-between px-4 py-4">
+    <main className="pb-24">
+      {/* Masthead */}
+      <header className="mx-auto w-full max-w-4xl px-4 pt-6 md:px-8">
+        <div className="flex items-center justify-between pb-3">
           <Link
             href="/masterclass"
-            className="font-mono text-xs uppercase tracking-widest text-white/70 hover:text-brand-neon md:text-sm"
+            className="font-meta text-[10px] text-[color:var(--ink-soft)] hover:text-[color:var(--grape)] md:text-xs"
           >
-            ← Tu masterclass
+            ← Tu espacio
           </Link>
-          <span className="font-mono text-[10px] uppercase tracking-widest text-white/60 md:text-xs">
-            Lección {lesson.id} de {LESSONS.length}
-          </span>
+          <p className="font-meta text-[10px] text-[color:var(--ink-soft)] md:text-xs">
+            Lección {lesson.id} / {LESSONS.length}
+          </p>
         </div>
+        <div className="rule-double" />
       </header>
 
-      <div className="mx-auto max-w-4xl px-4 pb-20">
-        {/* Título */}
-        <section className="pt-8 md:pt-10">
-          <div className="flex flex-wrap items-center gap-3">
-            <span className={`font-mono text-xs uppercase tracking-widest ${accentText}`}>
-              Fase {phase.id} — {phase.name}
-            </span>
-            <span className="font-mono text-xs uppercase tracking-widest text-white/70">
-              {lesson.week} · {lesson.duration}
-            </span>
+      <div className="mx-auto w-full max-w-4xl px-4 md:px-8">
+        {/* Apertura de capítulo */}
+        <section className="flex items-start gap-4 pt-10 md:gap-7 md:pt-14">
+          <span className="outline-numeral pt-2 text-7xl md:text-9xl" aria-hidden>
+            {String(lesson.id).padStart(2, "0")}
+          </span>
+          <div>
+            <p className="font-meta text-[9px] md:text-[10px]">
+              <em
+                className="not-italic"
+                style={{
+                  backgroundImage: `linear-gradient(to top, transparent 4%, ${PHASE_TINT[phase.color]} 4%, ${PHASE_TINT[phase.color]} 60%, transparent 60%)`,
+                }}
+              >
+                Fase {phase.id} · {phase.name}
+              </em>
+              <span className="ml-3 text-[color:var(--ink-soft)]">
+                {lesson.week} · {lesson.duration}
+              </span>
+            </p>
+            <h1 className="mt-3 text-3xl leading-tight md:text-5xl">
+              {lesson.title}
+            </h1>
           </div>
-          <h1 className="mt-3 text-3xl leading-tight text-white md:text-5xl">
-            {lesson.title}
-          </h1>
         </section>
 
-        {/* Video */}
-        <section className="mt-8">
+        {/* Video / próximamente */}
+        <section className="mt-10">
           {lesson.videoUrl ? (
-            <div className="border-4 border-white bg-black shadow-[10px_10px_0px_#cff154]">
-              <video
-                controls
-                playsInline
-                preload="metadata"
-                poster={cloudinaryPoster(lesson.videoUrl)}
-                className="block h-auto w-full"
-              >
-                <source src={lesson.videoUrl} type="video/mp4" />
-                Tu navegador no puede reproducir este video.
-              </video>
-            </div>
+            <figure>
+              <div className="plate bg-black">
+                <video
+                  controls
+                  playsInline
+                  preload="metadata"
+                  poster={cloudinaryPoster(lesson.videoUrl)}
+                  className="block h-auto w-full"
+                >
+                  <source src={lesson.videoUrl} type="video/mp4" />
+                  Tu navegador no puede reproducir este video.
+                </video>
+              </div>
+              <figcaption className="font-meta mt-4 text-[9px] text-[color:var(--ink-soft)] md:text-[10px]">
+                Lámina {String(lesson.id).padStart(2, "0")} · Con Gabi, desde
+                casa
+              </figcaption>
+            </figure>
           ) : (
-            <div className="flex aspect-video flex-col items-center justify-center gap-4 border-4 border-white bg-black p-6 text-center shadow-[10px_10px_0px_#c4b5fd]">
-              <span className="border-2 border-brand-purple px-3 py-1 font-mono text-xs uppercase tracking-widest text-brand-purple">
-                Próximamente
-              </span>
-              <p className="max-w-md text-sm leading-relaxed text-white/70 md:text-base">
-                Gabi está preparando esta lección con todo el amor del mundo.
-                Te avisaremos en cuanto esté lista — mientras tanto, tus guías
-                de esta fase ya están disponibles abajo. 💜
+            <div className="plate-lilac flex aspect-video flex-col items-center justify-center gap-5 bg-[color:var(--paper-deep)]/70 p-6 text-center">
+              <span className="stamp">En producción</span>
+              <p className="font-hand text-3xl leading-snug text-[color:var(--grape)] md:text-4xl">
+                Gabi está grabando esta lección para ti
+              </p>
+              <p className="max-w-md text-sm leading-relaxed text-[color:var(--ink-soft)] md:text-base">
+                Te avisaremos en cuanto esté lista. Mientras tanto, tus guías
+                de esta fase ya te esperan aquí abajo.
               </p>
             </div>
           )}
         </section>
 
         {/* Descripción */}
-        <section className="mt-8">
-          <h2 className="text-2xl text-brand-neon md:text-3xl">
+        <section className="mt-12">
+          <p className="font-meta text-[9px] text-[color:var(--grape)] md:text-[10px]">
             En esta lección
-          </h2>
-          <p className="mt-3 max-w-2xl text-sm leading-relaxed text-white/80 md:text-base">
+          </p>
+          <p className="dropcap mt-4 max-w-2xl text-base leading-relaxed text-[color:var(--ink-soft)] md:text-lg">
             {lesson.description}
           </p>
         </section>
 
         {/* Marcar completada */}
-        <section className="mt-8">
+        <section className="mt-10">
           <CompleteButton lessonId={lesson.id} />
         </section>
 
         {/* Guías de la fase */}
         {guides.length > 0 && (
-          <section className="mt-12">
-            <h2 className="text-2xl text-brand-purple md:text-3xl">
-              Guías de esta fase
+          <section className="mt-14">
+            <h2 className="text-3xl md:text-4xl">
+              Guías de <em className="marker-lilac pr-1">esta fase</em>
             </h2>
-            <div className="mt-5 grid gap-4 md:grid-cols-2">
-              {guides.map((guide) => (
-                <a
-                  key={guide.slug}
-                  href={guide.file}
-                  download
-                  className="flex items-start gap-4 border-4 border-white bg-black p-4 transition-transform hover:-translate-y-1 hover:border-brand-purple"
-                >
-                  <div className="flex h-11 w-11 shrink-0 items-center justify-center border-4 border-brand-purple font-heading text-base font-black text-brand-purple">
-                    PDF
+            <div className="mt-7 grid grid-cols-2 gap-x-5 gap-y-8 sm:grid-cols-3 md:grid-cols-4">
+              {guides.map((guide, i) => (
+                <a key={guide.slug} href={guide.file} download className="group block">
+                  <div
+                    className="shelf-cover"
+                    style={{ transform: `rotate(${i % 2 === 0 ? -1.2 : 1.4}deg)` }}
+                  >
+                    <Image
+                      src={guide.cover}
+                      alt={`Portada: ${guide.title}`}
+                      width={560}
+                      height={792}
+                      className="block h-auto w-full"
+                    />
                   </div>
-                  <div className="min-w-0 flex-1">
-                    <h3 className="text-base leading-tight text-white">
-                      {guide.title}
-                    </h3>
-                    <p className="mt-1 font-mono text-[10px] uppercase tracking-widest text-brand-neon">
-                      Descargar ↓
-                    </p>
-                  </div>
+                  <h3 className="mt-3 text-sm leading-snug md:text-base">
+                    {guide.title}
+                  </h3>
+                  <p className="font-meta mt-1 text-[9px] text-[color:var(--grape)] group-hover:underline">
+                    Descargar PDF ↓
+                  </p>
                 </a>
               ))}
             </div>
           </section>
         )}
 
-        {/* Navegación */}
-        <section className="mt-12 flex flex-col gap-4 border-t-4 border-white/30 pt-8 md:flex-row md:justify-between">
-          {prev ? (
-            <Link
-              href={`/masterclass/leccion/${prev.id}`}
-              className="group max-w-xs"
-            >
-              <p className="font-mono text-[10px] uppercase tracking-widest text-white/70">
-                ← Lección anterior
-              </p>
-              <p className="mt-1 text-sm text-white group-hover:text-brand-neon">
-                {prev.title}
-              </p>
-            </Link>
-          ) : (
-            <span />
-          )}
-          {next && (
-            <Link
-              href={`/masterclass/leccion/${next.id}`}
-              className="group max-w-xs md:text-right"
-            >
-              <p className="font-mono text-[10px] uppercase tracking-widest text-white/70">
-                Siguiente lección →
-              </p>
-              <p className="mt-1 text-sm text-white group-hover:text-brand-neon">
-                {next.title}
-              </p>
-            </Link>
-          )}
+        {/* Navegación de capítulos */}
+        <section className="mt-16">
+          <div className="rule-double" />
+          <div className="flex flex-col justify-between gap-6 py-6 md:flex-row">
+            {prev ? (
+              <Link href={`/masterclass/leccion/${prev.id}`} className="group max-w-xs">
+                <p className="font-meta text-[9px] text-[color:var(--ink-soft)] md:text-[10px]">
+                  ← Lección anterior
+                </p>
+                <p className="mt-2 text-lg leading-snug group-hover:text-[color:var(--grape)]">
+                  {prev.title}
+                </p>
+              </Link>
+            ) : (
+              <span />
+            )}
+            {next && (
+              <Link
+                href={`/masterclass/leccion/${next.id}`}
+                className="group max-w-xs md:text-right"
+              >
+                <p className="font-meta text-[9px] text-[color:var(--ink-soft)] md:text-[10px]">
+                  Siguiente lección →
+                </p>
+                <p className="mt-2 text-lg leading-snug group-hover:text-[color:var(--grape)]">
+                  {next.title}
+                </p>
+              </Link>
+            )}
+          </div>
+          <div className="rule-double" />
         </section>
 
-        {/* Disclaimer */}
-        <section className="mt-12 border-4 border-white/30 p-5">
-          <p className="font-mono text-[10px] uppercase tracking-widest text-white/70">
+        {/* Nota médica */}
+        <aside className="mt-10 border-2 border-[color:var(--ink)]/25 border-l-[6px] border-l-[color:var(--grape)] bg-[color:var(--paper-deep)]/60 p-5">
+          <p className="font-meta text-[9px] text-[color:var(--grape)] md:text-[10px]">
             Recuerda — tu seguridad primero
           </p>
-          <p className="mt-2 text-xs leading-relaxed text-white/60 md:text-sm">
+          <p className="mt-2 text-sm leading-relaxed text-[color:var(--ink-soft)]">
             {MEDICAL_DISCLAIMER}
           </p>
-        </section>
+        </aside>
       </div>
     </main>
   );

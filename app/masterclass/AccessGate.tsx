@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { LOGO_URL, WHATSAPP_HELP_URL } from "./branding";
+import { GABI_PHOTO, LOGO_INK, WHATSAPP_HELP_URL } from "./branding";
 
 type GateError = null | "wrong" | "network";
 
@@ -35,92 +35,131 @@ export default function AccessGate() {
   }
 
   return (
-    <main className="grid-bg flex min-h-screen flex-col items-center justify-center px-4 py-12">
-      <Image
-        src={LOGO_URL}
-        alt="Gabifit"
-        width={220}
-        height={70}
-        className="mb-10 h-auto w-44 md:w-56"
-        priority
-      />
-
-      <div className="w-full max-w-md border-4 border-white bg-black p-6 shadow-[10px_10px_0px_#c4b5fd] md:p-8">
-        <p className="mb-2 font-mono text-xs uppercase tracking-widest text-brand-purple">
-          Área de miembros
-        </p>
-        <h1 className="mb-4 text-3xl text-white md:text-4xl">
-          Bienvenida a tu espacio
-        </h1>
-        <p className="mb-6 text-sm leading-relaxed text-white/80">
-          Esta es tu masterclass: 8 semanas para recuperar tu figura, tu
-          energía y tu identidad — a tu ritmo, sin culpa y acompañada.
-          Escribe el código que recibiste al unirte al programa.
-        </p>
-
-        <form onSubmit={submit} className="flex flex-col gap-4">
-          <input
-            type="text"
-            value={code}
-            onChange={(e) => setCode(e.target.value)}
-            placeholder="TU CÓDIGO DE ACCESO"
-            aria-label="Código de acceso"
-            autoCapitalize="characters"
-            autoComplete="off"
-            className="w-full border-4 border-white bg-black px-4 py-3 font-mono text-base uppercase tracking-widest text-brand-neon placeholder:text-white/40 focus:border-brand-neon focus:outline-none"
+    <main className="flex min-h-screen flex-col px-4 py-6 md:px-8">
+      {/* Masthead */}
+      <header className="rise mx-auto w-full max-w-5xl">
+        <div className="flex items-center justify-between pb-3">
+          <Image
+            src={LOGO_INK}
+            alt="Gabifit"
+            width={130}
+            height={46}
+            className="h-auto w-28 md:w-32"
+            priority
           />
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full border-4 border-black bg-brand-neon px-4 py-3 font-heading text-lg font-black uppercase text-black shadow-[6px_6px_0px_#ffffff] transition-transform hover:-translate-y-0.5 disabled:opacity-60"
-          >
-            {loading ? "Verificando…" : "Entrar a mi masterclass →"}
-          </button>
-        </form>
-
-        {error && (
-          <p
-            role="alert"
-            className="mt-4 border-2 border-brand-purple bg-brand-purple/10 p-3 text-sm text-brand-purple"
-          >
-            {error === "wrong" ? (
-              <>
-                Ese código no es correcto. Revísalo tal como lo recibiste, o{" "}
-                <a
-                  href={WHATSAPP_HELP_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-bold underline"
-                >
-                  escríbenos por WhatsApp
-                </a>{" "}
-                y te ayudamos al instante. 💜
-              </>
-            ) : (
-              <>
-                No pudimos verificar tu código — parece un problema de
-                conexión. Revisa tu internet e inténtalo de nuevo, o{" "}
-                <a
-                  href={WHATSAPP_HELP_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-bold underline"
-                >
-                  escríbenos por WhatsApp
-                </a>
-                . 💜
-              </>
-            )}
+          <p className="font-meta text-[10px] text-[color:var(--ink-soft)] md:text-xs">
+            Área de miembros
           </p>
-        )}
+        </div>
+        <div className="rule-double" />
+      </header>
+
+      {/* Invitación */}
+      <div className="mx-auto flex w-full max-w-5xl flex-1 items-center py-10 md:py-14">
+        <div className="grid w-full items-center gap-10 md:grid-cols-[5fr_7fr] md:gap-14">
+          {/* Foto de Gabi */}
+          <figure className="rise-1 rise mx-auto w-56 max-w-full md:w-full md:max-w-xs">
+            <div className="arch plate-lilac">
+              <Image
+                src={GABI_PHOTO}
+                alt="Gabi, tu coach"
+                width={560}
+                height={840}
+                className="block h-auto w-full object-cover"
+                priority
+              />
+            </div>
+            <figcaption className="font-hand mt-4 -rotate-2 text-center text-2xl text-[color:var(--grape)]">
+              tu coach, Gabi ♡
+            </figcaption>
+          </figure>
+
+          {/* Carta + código */}
+          <div>
+            <p className="rise rise-1 font-meta text-[10px] text-[color:var(--grape)] md:text-xs">
+              Invitación personal · Programa Post-Parto
+            </p>
+            <h1 className="rise rise-2 mt-4 text-5xl md:text-6xl lg:text-7xl">
+              Bienvenida a<br />
+              <em className="marker pr-2">tu espacio.</em>
+            </h1>
+            <p className="rise rise-3 mt-6 max-w-md text-base leading-relaxed text-[color:var(--ink-soft)] md:text-lg">
+              Ocho semanas para recuperar tu figura, tu energía y tu identidad
+              — a tu ritmo, sin culpa y acompañada. Esto lo preparé para ti.
+            </p>
+
+            <form onSubmit={submit} className="rise rise-4 mt-10 max-w-md">
+              <label
+                htmlFor="codigo"
+                className="font-meta block text-[10px] text-[color:var(--ink-soft)]"
+              >
+                Escribe el código que recibiste al unirte
+              </label>
+              <input
+                id="codigo"
+                type="text"
+                value={code}
+                onChange={(e) => setCode(e.target.value)}
+                placeholder="TU CÓDIGO"
+                autoCapitalize="characters"
+                autoComplete="off"
+                className="input-line mt-3"
+              />
+              <button type="submit" disabled={loading} className="btn-ink mt-7 disabled:opacity-60">
+                {loading ? "Verificando…" : "Entrar a mi masterclass →"}
+              </button>
+            </form>
+
+            {error && (
+              <p
+                role="alert"
+                className="mt-6 max-w-md border-2 border-[color:var(--grape)] bg-[color:var(--lilac)]/20 p-4 text-sm leading-relaxed text-[color:var(--ink)]"
+              >
+                {error === "wrong" ? (
+                  <>
+                    Ese código no es correcto. Revísalo tal como lo recibiste,
+                    o{" "}
+                    <a
+                      href={WHATSAPP_HELP_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-semibold text-[color:var(--grape)] underline"
+                    >
+                      escríbenos por WhatsApp
+                    </a>{" "}
+                    y te ayudamos al instante. 💜
+                  </>
+                ) : (
+                  <>
+                    No pudimos verificar tu código — parece un problema de
+                    conexión. Inténtalo de nuevo, o{" "}
+                    <a
+                      href={WHATSAPP_HELP_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-semibold text-[color:var(--grape)] underline"
+                    >
+                      escríbenos por WhatsApp
+                    </a>
+                    . 💜
+                  </>
+                )}
+              </p>
+            )}
+          </div>
+        </div>
       </div>
 
-      <p className="mt-8 max-w-md text-center font-mono text-xs text-white/60">
-        ¿Aún no eres parte del programa?{" "}
-        <a href="/" className="text-brand-neon underline">
-          Conoce el Programa Gabifit Post-Parto
-        </a>
-      </p>
+      {/* Pie */}
+      <footer className="mx-auto w-full max-w-5xl">
+        <div className="rule-double" />
+        <p className="font-meta py-4 text-center text-[10px] text-[color:var(--ink-soft)]">
+          ¿Aún no eres parte?{" "}
+          <a href="/" className="text-[color:var(--grape)] underline">
+            Conoce el programa
+          </a>
+        </p>
+      </footer>
     </main>
   );
 }

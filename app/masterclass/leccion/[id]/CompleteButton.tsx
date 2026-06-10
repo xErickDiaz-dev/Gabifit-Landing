@@ -9,20 +9,28 @@ export default function CompleteButton({ lessonId }: { lessonId: number }) {
   if (!loaded) return null;
 
   return (
-    <div className="flex flex-col items-start gap-3">
+    <div className="flex flex-wrap items-center gap-4">
       <button
         onClick={() => toggle(lessonId)}
-        className={`border-4 px-5 py-3 font-heading text-base font-black uppercase transition-transform hover:-translate-y-0.5 md:text-lg ${
-          done
-            ? "border-brand-neon bg-black text-brand-neon"
-            : "border-black bg-brand-neon text-black shadow-[6px_6px_0px_#ffffff]"
-        }`}
+        aria-pressed={done}
+        className="group flex items-center gap-3 text-left"
       >
-        {done ? "✓ Lección completada" : "Marcar como completada"}
+        <span
+          className={`flex h-9 w-9 shrink-0 items-center justify-center border-2 border-[color:var(--ink)] text-lg transition-colors ${
+            done
+              ? "bg-[color:var(--neon)]"
+              : "bg-transparent group-hover:bg-[color:var(--paper-deep)]"
+          }`}
+        >
+          {done ? "✓" : ""}
+        </span>
+        <span className="text-lg md:text-xl">
+          {done ? "Lección completada" : "Marcar lección como completada"}
+        </span>
       </button>
       {done && (
-        <p className="text-sm text-brand-purple">
-          ¡Eso es! Un paso más cerca de la mamá fuerte que estás construyendo. 💜
+        <p className="font-hand -rotate-1 text-2xl text-[color:var(--grape)]">
+          ¡eso es, mami! un paso más ♡
         </p>
       )}
     </div>

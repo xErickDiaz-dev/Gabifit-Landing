@@ -1,4 +1,21 @@
 import type { Metadata } from "next";
+import { Caveat, Fraunces } from "next/font/google";
+import "./portal.css";
+
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  style: ["normal", "italic"],
+  axes: ["opsz"],
+  variable: "--font-fraunces",
+  display: "swap",
+});
+
+const caveat = Caveat({
+  subsets: ["latin"],
+  weight: ["600", "700"],
+  variable: "--font-caveat",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "Tu Masterclass | Gabifit",
@@ -12,5 +29,9 @@ export default function MasterclassLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <div className="min-h-screen bg-black text-white">{children}</div>;
+  return (
+    <div className={`portal ${fraunces.variable} ${caveat.variable}`}>
+      {children}
+    </div>
+  );
 }

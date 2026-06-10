@@ -6,6 +6,13 @@
 export const LOGO_URL =
   "https://res.cloudinary.com/dmkx2uowd/image/upload/q_auto/f_auto/v1775404908/GABIFIT_LOGO_VARIANTES_GABIFIT_copy_3_1_kjjzmf.png";
 
+// Logo en tinta (fondo transparente) para el papel crema del portal
+export const LOGO_INK = "/assets/logo-ink.png";
+
+// Fotos reales de Gabi (sesión de estudio usada en el evento)
+export const GABI_PHOTO = "/assets/mama-y-coach.jpeg";
+export const GABI_CUTOUT = "/assets/gabi-cutout.webp";
+
 export const WHATSAPP_HELP_URL =
   "https://wa.me/18098939904?text=" +
   encodeURIComponent(

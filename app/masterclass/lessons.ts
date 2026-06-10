@@ -32,6 +32,7 @@ export type Lesson = {
 export type Guide = {
   slug: string;
   file: string;
+  cover: string;
   title: string;
   description: string;
   phases: number[];
@@ -177,6 +178,7 @@ export const LESSONS: Lesson[] = [
 export const GUIDES: Guide[] = [
   {
     slug: "guia-nutricion",
+    cover: "/guias/covers/guia-nutricion.jpg",
     file: "/guias/guia-nutricion-gabifit.pdf",
     title: "Guía de Nutrición Post-Parto",
     description: "Tu base de alimentación anti-inflamatoria, adaptada a la lactancia.",
@@ -184,6 +186,7 @@ export const GUIDES: Guide[] = [
   },
   {
     slug: "protocolo-rutinas",
+    cover: "/guias/covers/protocolo-rutinas.jpg",
     file: "/guias/protocolo-rutinas-gabifit.pdf",
     title: "Protocolo de Rutinas",
     description: "Todas las rutinas del programa, semana por semana.",
@@ -191,6 +194,7 @@ export const GUIDES: Guide[] = [
   },
   {
     slug: "checklist-mama-en-forma",
+    cover: "/guias/covers/checklist-mama-en-forma.jpg",
     file: "/guias/checklist-mama-en-forma-gabifit.pdf",
     title: "Checklist Mamá en Forma",
     description: "Tu mapa diario: marca cada paso y mira tu progreso crecer.",
@@ -198,6 +202,7 @@ export const GUIDES: Guide[] = [
   },
   {
     slug: "tribu-gabifit",
+    cover: "/guias/covers/tribu-gabifit.jpg",
     file: "/guias/tribu-gabifit.pdf",
     title: "Tribu Gabifit",
     description: "Cómo funciona tu comunidad de apoyo — no estás sola en esto.",
@@ -205,6 +210,7 @@ export const GUIDES: Guide[] = [
   },
   {
     slug: "menus-56-dias",
+    cover: "/guias/covers/menus-56-dias.jpg",
     file: "/guias/menus-56-dias-gabifit.pdf",
     title: "Menús 56 Días",
     description: "8 semanas de menús resueltos con lista de compras incluida.",
@@ -212,6 +218,7 @@ export const GUIDES: Guide[] = [
   },
   {
     slug: "mama-reset-detox",
+    cover: "/guias/covers/mama-reset-detox.jpg",
     file: "/guias/mama-reset-detox-gabifit.pdf",
     title: "Mamá Reset — Detox 7 Días",
     description: "El reinicio de 7 días para destrabar tu energía (Fase 3).",
@@ -219,6 +226,7 @@ export const GUIDES: Guide[] = [
   },
   {
     slug: "suplementacion",
+    cover: "/guias/covers/suplementacion.jpg",
     file: "/guias/suplementacion-gabifit.pdf",
     title: "Guía de Suplementación",
     description: "Lo que funciona de verdad en el post-parto — sin humo.",
