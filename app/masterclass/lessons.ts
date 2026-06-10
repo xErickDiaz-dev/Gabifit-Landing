@@ -96,10 +96,10 @@ export const LESSONS: Lesson[] = [
     id: 4,
     phase: 2,
     week: "Semana 3",
-    title: "Diastasis Recti — Cómo Saber si lo Tienes y Qué Hacer",
+    title: "Diástasis Abdominal — Cómo Saber si la Tienes y Qué Hacer",
     duration: "25-30 min",
     description:
-      "La separación abdominal que nadie te explicó. Aprende a auto-evaluarte en casa con las manos, entender qué significa tu resultado, y qué ejercicios hacer (y cuáles evitar) para cerrarla de forma segura.",
+      "La separación abdominal que nadie te explicó. Aprende a autoevaluarte en casa con las manos, entender qué significa tu resultado, y qué ejercicios hacer (y cuáles evitar) para cerrarla de forma segura.",
     videoUrl: "",
   },
   {
@@ -146,7 +146,7 @@ export const LESSONS: Lesson[] = [
     id: 9,
     phase: 3,
     week: "Semanas 6-7",
-    title: "Core Fuerte — Más Allá de la Diastasis",
+    title: "Core Fuerte — Más Allá de la Diástasis",
     duration: "30 min",
     description:
       "Tu core ya despertó, ya sanó — ahora vamos a hacerlo fuerte de verdad. Trabajo profundo y funcional que se nota en tu postura, tu cintura y tu fuerza para cargar a tu bebé sin dolor.",
@@ -229,8 +229,17 @@ export const GUIDES: Guide[] = [
 export const MEDICAL_DISCLAIMER =
   "Este programa está diseñado para mujeres con parto vaginal sin complicaciones. Si tuviste cesárea, espera la aprobación de tu médico antes de comenzar (mínimo 6-8 semanas). Si sientes dolor, sangrado excesivo, presión en el piso pélvico o cualquier malestar — para de inmediato y consulta a tu ginecólogo. Este contenido es educativo y no reemplaza la atención médica personalizada.";
 
-export const LOGO_URL =
-  "https://res.cloudinary.com/dmkx2uowd/image/upload/q_auto/f_auto/v1775404908/GABIFIT_LOGO_VARIANTES_GABIFIT_copy_3_1_kjjzmf.png";
+// Versión "limpia" de una lección para mandar a componentes cliente:
+// sin videoUrl, para que las URLs del contenido pagado nunca entren
+// en el JavaScript público del navegador.
+export type ClientLesson = Omit<Lesson, "videoUrl"> & { hasVideo: boolean };
+
+export function toClientLessons(): ClientLesson[] {
+  return LESSONS.map(({ videoUrl, ...rest }) => ({
+    ...rest,
+    hasVideo: Boolean(videoUrl),
+  }));
+}
 
 // Genera un poster (miniatura) automático desde la URL del video de Cloudinary
 export function cloudinaryPoster(videoUrl: string): string | undefined {

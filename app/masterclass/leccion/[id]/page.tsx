@@ -46,7 +46,7 @@ export default async function LessonPage({
           >
             ← Tu masterclass
           </Link>
-          <span className="font-mono text-[10px] uppercase tracking-widest text-white/40 md:text-xs">
+          <span className="font-mono text-[10px] uppercase tracking-widest text-white/60 md:text-xs">
             Lección {lesson.id} de {LESSONS.length}
           </span>
         </div>
@@ -59,7 +59,7 @@ export default async function LessonPage({
             <span className={`font-mono text-xs uppercase tracking-widest ${accentText}`}>
               Fase {phase.id} — {phase.name}
             </span>
-            <span className="font-mono text-xs uppercase tracking-widest text-white/50">
+            <span className="font-mono text-xs uppercase tracking-widest text-white/70">
               {lesson.week} · {lesson.duration}
             </span>
           </div>
@@ -150,7 +150,7 @@ export default async function LessonPage({
               href={`/masterclass/leccion/${prev.id}`}
               className="group max-w-xs"
             >
-              <p className="font-mono text-[10px] uppercase tracking-widest text-white/50">
+              <p className="font-mono text-[10px] uppercase tracking-widest text-white/70">
                 ← Lección anterior
               </p>
               <p className="mt-1 text-sm text-white group-hover:text-brand-neon">
@@ -165,7 +165,7 @@ export default async function LessonPage({
               href={`/masterclass/leccion/${next.id}`}
               className="group max-w-xs md:text-right"
             >
-              <p className="font-mono text-[10px] uppercase tracking-widest text-white/50">
+              <p className="font-mono text-[10px] uppercase tracking-widest text-white/70">
                 Siguiente lección →
               </p>
               <p className="mt-1 text-sm text-white group-hover:text-brand-neon">
@@ -177,7 +177,7 @@ export default async function LessonPage({
 
         {/* Disclaimer */}
         <section className="mt-12 border-4 border-white/30 p-5">
-          <p className="font-mono text-[10px] uppercase tracking-widest text-white/50">
+          <p className="font-mono text-[10px] uppercase tracking-widest text-white/70">
             Recuerda — tu seguridad primero
           </p>
           <p className="mt-2 text-xs leading-relaxed text-white/60 md:text-sm">

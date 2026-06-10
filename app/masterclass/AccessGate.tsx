@@ -2,18 +2,20 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { LOGO_URL } from "./lessons";
+import { LOGO_URL, WHATSAPP_HELP_URL } from "./branding";
+
+type GateError = null | "wrong" | "network";
 
 export default function AccessGate() {
   const [code, setCode] = useState("");
-  const [error, setError] = useState(false);
+  const [error, setError] = useState<GateError>(null);
   const [loading, setLoading] = useState(false);
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
     if (!code.trim() || loading) return;
     setLoading(true);
-    setError(false);
+    setError(null);
     try {
       const res = await fetch("/api/masterclass/login", {
         method: "POST",
@@ -24,9 +26,9 @@ export default function AccessGate() {
         window.location.reload();
         return;
       }
-      setError(true);
+      setError("wrong");
     } catch {
-      setError(true);
+      setError("network");
     } finally {
       setLoading(false);
     }
@@ -51,7 +53,7 @@ export default function AccessGate() {
           Bienvenida a tu espacio
         </h1>
         <p className="mb-6 text-sm leading-relaxed text-white/80">
-          Este es tu masterclass: 8 semanas para recuperar tu figura, tu
+          Esta es tu masterclass: 8 semanas para recuperar tu figura, tu
           energía y tu identidad — a tu ritmo, sin culpa y acompañada.
           Escribe el código que recibiste al unirte al programa.
         </p>
@@ -62,9 +64,10 @@ export default function AccessGate() {
             value={code}
             onChange={(e) => setCode(e.target.value)}
             placeholder="TU CÓDIGO DE ACCESO"
+            aria-label="Código de acceso"
             autoCapitalize="characters"
             autoComplete="off"
-            className="w-full border-4 border-white bg-black px-4 py-3 font-mono text-base uppercase tracking-widest text-brand-neon placeholder:text-white/30 focus:border-brand-neon focus:outline-none"
+            className="w-full border-4 border-white bg-black px-4 py-3 font-mono text-base uppercase tracking-widest text-brand-neon placeholder:text-white/40 focus:border-brand-neon focus:outline-none"
           />
           <button
             type="submit"
@@ -76,14 +79,43 @@ export default function AccessGate() {
         </form>
 
         {error && (
-          <p className="mt-4 border-2 border-brand-purple bg-brand-purple/10 p-3 text-sm text-brand-purple">
-            Ese código no es correcto. Revísalo tal como lo recibiste, o
-            escríbenos por WhatsApp y te ayudamos al instante. 💜
+          <p
+            role="alert"
+            className="mt-4 border-2 border-brand-purple bg-brand-purple/10 p-3 text-sm text-brand-purple"
+          >
+            {error === "wrong" ? (
+              <>
+                Ese código no es correcto. Revísalo tal como lo recibiste, o{" "}
+                <a
+                  href={WHATSAPP_HELP_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-bold underline"
+                >
+                  escríbenos por WhatsApp
+                </a>{" "}
+                y te ayudamos al instante. 💜
+              </>
+            ) : (
+              <>
+                No pudimos verificar tu código — parece un problema de
+                conexión. Revisa tu internet e inténtalo de nuevo, o{" "}
+                <a
+                  href={WHATSAPP_HELP_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-bold underline"
+                >
+                  escríbenos por WhatsApp
+                </a>
+                . 💜
+              </>
+            )}
           </p>
         )}
       </div>
 
-      <p className="mt-8 max-w-md text-center font-mono text-xs text-white/40">
+      <p className="mt-8 max-w-md text-center font-mono text-xs text-white/60">
         ¿Aún no eres parte del programa?{" "}
         <a href="/" className="text-brand-neon underline">
           Conoce el Programa Gabifit Post-Parto

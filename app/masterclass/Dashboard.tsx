@@ -1,31 +1,26 @@
 "use client";
 
+// IMPORTANTE: este componente NO importa lessons.ts — recibe los datos por
+// props desde page.tsx (server), que solo lo renderiza con código válido.
+// Así los datos del programa (y los videoUrl) nunca entran al JS público.
+
 import Image from "next/image";
 import Link from "next/link";
-import {
-  GUIDES,
-  LESSONS,
-  LOGO_URL,
-  MEDICAL_DISCLAIMER,
-  PHASES,
-  type Lesson,
-} from "./lessons";
+import { LOGO_URL } from "./branding";
+import type { ClientLesson, Guide, Phase } from "./lessons";
 import { useProgress } from "./progress";
 
 const PHASE_ACCENT = {
   neon: {
     badge: "bg-brand-neon text-black",
-    shadow: "shadow-[8px_8px_0px_#cff154]",
     text: "text-brand-neon",
   },
   purple: {
     badge: "bg-brand-purple text-black",
-    shadow: "shadow-[8px_8px_0px_#c4b5fd]",
     text: "text-brand-purple",
   },
   white: {
     badge: "bg-white text-black",
-    shadow: "shadow-[8px_8px_0px_#ffffff]",
     text: "text-white",
   },
 } as const;
@@ -34,10 +29,9 @@ function LessonCard({
   lesson,
   completed,
 }: {
-  lesson: Lesson;
+  lesson: ClientLesson;
   completed: boolean;
 }) {
-  const comingSoon = !lesson.videoUrl;
   return (
     <Link
       href={`/masterclass/leccion/${lesson.id}`}
@@ -53,7 +47,7 @@ function LessonCard({
         {completed ? "✓" : String(lesson.id).padStart(2, "0")}
       </div>
       <div className="min-w-0 flex-1">
-        <p className="font-mono text-[10px] uppercase tracking-widest text-white/50 md:text-xs">
+        <p className="font-mono text-[10px] uppercase tracking-widest text-white/70 md:text-xs">
           {lesson.week} · {lesson.duration}
         </p>
         <h3 className="mt-1 text-base leading-tight text-white md:text-lg">
@@ -61,7 +55,7 @@ function LessonCard({
         </h3>
       </div>
       <div className="shrink-0">
-        {comingSoon ? (
+        {!lesson.hasVideo ? (
           <span className="border-2 border-brand-purple px-2 py-1 font-mono text-[9px] uppercase tracking-wider text-brand-purple md:text-[10px]">
             Próximamente
           </span>
@@ -75,11 +69,21 @@ function LessonCard({
   );
 }
 
-export default function Dashboard() {
+export default function Dashboard({
+  phases,
+  lessons,
+  guides,
+  disclaimer,
+}: {
+  phases: Phase[];
+  lessons: ClientLesson[];
+  guides: Guide[];
+  disclaimer: string;
+}) {
   const { completed, loaded } = useProgress();
-  const done = LESSONS.filter((l) => completed.includes(l.id)).length;
-  const pct = Math.round((done / LESSONS.length) * 100);
-  const next = LESSONS.find((l) => !completed.includes(l.id)) ?? LESSONS[0];
+  const done = lessons.filter((l) => completed.includes(l.id)).length;
+  const pct = Math.round((done / lessons.length) * 100);
+  const next = lessons.find((l) => !completed.includes(l.id)) ?? lessons[0];
 
   return (
     <main className="grid-bg min-h-screen">
@@ -118,11 +122,11 @@ export default function Dashboard() {
 
           <div className="mt-8 border-4 border-white bg-black p-5 shadow-[8px_8px_0px_#cff154] md:p-6">
             <div className="flex items-end justify-between gap-4">
-              <p className="font-mono text-xs uppercase tracking-widest text-white/60">
+              <p className="font-mono text-xs uppercase tracking-widest text-white/70">
                 Tu progreso
               </p>
               <p className="font-heading text-2xl text-brand-neon md:text-3xl">
-                {loaded ? `${done}/${LESSONS.length}` : "–"}
+                {loaded ? `${done}/${lessons.length}` : "–"}
               </p>
             </div>
             <div className="mt-3 h-4 border-2 border-white bg-black">
@@ -135,11 +139,11 @@ export default function Dashboard() {
               <p className="text-sm text-white/80">
                 {done === 0
                   ? "Empieza por la Lección 1 — el despertar de tu cuerpo. 💪"
-                  : done === LESSONS.length
+                  : done === lessons.length
                     ? "¡COMPLETASTE TODO EL PROGRAMA! Estamos orgullosas de ti. 🎉"
                     : `Vas increíble. Tu siguiente paso: Lección ${next.id}.`}
               </p>
-              {done < LESSONS.length && (
+              {done < lessons.length && (
                 <Link
                   href={`/masterclass/leccion/${next.id}`}
                   className="inline-block shrink-0 border-4 border-black bg-brand-neon px-4 py-2 text-center font-heading text-sm font-black uppercase text-black shadow-[4px_4px_0px_#ffffff] transition-transform hover:-translate-y-0.5"
@@ -149,12 +153,22 @@ export default function Dashboard() {
               )}
             </div>
           </div>
+
+          {/* Aviso médico — visible antes de empezar */}
+          <div className="mt-6 border-4 border-brand-purple/60 bg-brand-purple/5 p-5">
+            <p className="font-mono text-[10px] uppercase tracking-widest text-brand-purple">
+              Importante — lee esto antes de empezar
+            </p>
+            <p className="mt-2 text-xs leading-relaxed text-white/80 md:text-sm">
+              {disclaimer}
+            </p>
+          </div>
         </section>
 
         {/* Fases */}
-        {PHASES.map((phase) => {
+        {phases.map((phase) => {
           const accent = PHASE_ACCENT[phase.color];
-          const phaseLessons = LESSONS.filter((l) => l.phase === phase.id);
+          const phaseLessons = lessons.filter((l) => l.phase === phase.id);
           return (
             <section key={phase.id} className="mt-14">
               <div className="mb-5 flex flex-wrap items-center gap-3">
@@ -163,14 +177,14 @@ export default function Dashboard() {
                 >
                   Fase {phase.id}
                 </span>
-                <span className="font-mono text-xs uppercase tracking-widest text-white/50">
+                <span className="font-mono text-xs uppercase tracking-widest text-white/70">
                   {phase.weeks}
                 </span>
               </div>
               <h2 className={`text-3xl md:text-4xl ${accent.text}`}>
                 {phase.name}
               </h2>
-              <p className="mt-2 text-sm text-white/70">{phase.subtitle}</p>
+              <p className="mt-2 text-sm text-white/80">{phase.subtitle}</p>
               <div className="mt-6 flex flex-col gap-4">
                 {phaseLessons.map((lesson) => (
                   <LessonCard
@@ -189,12 +203,12 @@ export default function Dashboard() {
           <h2 className="text-3xl text-brand-purple md:text-4xl">
             Tus guías
           </h2>
-          <p className="mt-2 max-w-2xl text-sm text-white/70">
+          <p className="mt-2 max-w-2xl text-sm text-white/80">
             Descárgalas, imprímelas, pégalas en la nevera. Son tuyas para
             siempre.
           </p>
           <div className="mt-6 grid gap-4 md:grid-cols-2">
-            {GUIDES.map((guide) => (
+            {guides.map((guide) => (
               <a
                 key={guide.slug}
                 href={guide.file}
@@ -208,7 +222,7 @@ export default function Dashboard() {
                   <h3 className="text-base leading-tight text-white md:text-lg">
                     {guide.title}
                   </h3>
-                  <p className="mt-1 text-xs text-white/60 md:text-sm">
+                  <p className="mt-1 text-xs text-white/70 md:text-sm">
                     {guide.description}
                   </p>
                   <p className="mt-2 font-mono text-[10px] uppercase tracking-widest text-brand-neon">
@@ -218,16 +232,6 @@ export default function Dashboard() {
               </a>
             ))}
           </div>
-        </section>
-
-        {/* Disclaimer */}
-        <section className="mt-16 border-4 border-white/30 p-5">
-          <p className="font-mono text-[10px] uppercase tracking-widest text-white/50">
-            Importante — lee esto antes de empezar
-          </p>
-          <p className="mt-2 text-xs leading-relaxed text-white/60 md:text-sm">
-            {MEDICAL_DISCLAIMER}
-          </p>
         </section>
       </div>
     </main>
