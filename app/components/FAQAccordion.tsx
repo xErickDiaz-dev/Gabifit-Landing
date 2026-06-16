@@ -5,7 +5,7 @@ import { useState } from "react";
 const faqs = [
   {
     q: "¿Cuándo tengo acceso al programa?",
-    a: "Inmediatamente después del pago. Recibes un email de confirmación con todos los accesos en menos de 5 minutos.",
+    a: "Inmediatamente después del pago recibes tu código y el enlace al portal. Desde el primer minuto descargas las 7 guías completas (nutrición, menús de 56 días, rutinas, detox y más) y empiezas hoy mismo.",
   },
   {
     q: "¿Funciona si estoy lactando?",
@@ -24,8 +24,12 @@ const faqs = [
     a: "Aceptamos tarjeta de crédito/débito, PayPal y transferencia bancaria. El proceso es 100% seguro.",
   },
   {
-    q: "¿Por qué el precio sube el Junio 1?",
-    a: "El precio de $97 es exclusivo del lanzamiento de Día de las Madres. Es nuestra forma de honrar a las mamás que confían primero. Después de Mayo 30, el programa regresa a su precio regular de $147.",
+    q: "¿Ya están todos los videos disponibles?",
+    a: "Las 7 guías completas las descargas hoy mismo. Las clases en video se publican semana a semana, siguiendo las 3 fases del programa — porque está diseñado para acompañarte progresivamente durante las 8 semanas, no para verlo todo de golpe. Tu acceso es de por vida: cada clase nueva queda guardada en tu portal para siempre.",
+  },
+  {
+    q: "¿Por qué el precio es de $97?",
+    a: "Es el precio de lanzamiento. El valor regular del programa completo es $147. Quienes entran ahora aseguran el acceso de por vida — con todas las clases que se vayan publicando incluidas — al precio más bajo que va a tener.",
   },
   {
     q: "¿Cuánto tiempo necesito por día?",

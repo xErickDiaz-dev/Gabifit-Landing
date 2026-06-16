@@ -2,8 +2,18 @@ import FAQAccordion from "./components/FAQAccordion";
 import TestimonialSlider from "./components/TestimonialSlider";
 import VSLPlayer from "./components/VSLPlayer";
 
+// ⬇️ PEGAR AQUÍ el link de checkout de Hotmart cuando Gaby cree el producto.
+// Mientras esté vacío, el botón abre WhatsApp con Gaby para no perder la venta.
+const CHECKOUT_URL = "";
+const WHATSAPP_FALLBACK =
+  "https://wa.me/18098939904?text=" +
+  encodeURIComponent(
+    "Hola Gabi 💜 quiero acceder a la Masterclass Post-Parto ($97). ¿Cómo hago el pago?"
+  );
+const BUY_URL = CHECKOUT_URL || WHATSAPP_FALLBACK;
+
 const PROMO_TEXT =
-  "🔥 OFERTA DÍA DE LAS MADRES: ACCEDE POR SOLO $97 USD — PRECIO SUBE A $147 EL JUNIO 1 · ¡ÚLTIMOS CUPOS DISPONIBLES!";
+  "🔥 PRECIO DE LANZAMIENTO: ACCEDE POR SOLO $97 USD (PRECIO REGULAR $147) · PAGO ÚNICO · ACCESO DE POR VIDA";
 
 const PROBLEMS = [
   {
@@ -90,16 +100,16 @@ const VALUE_STACK = [
 ];
 
 const CREDENTIALS = [
-  "8+ años de experiencia en fitness femenino",
+  "9+ años de experiencia en fitness femenino",
   "Especialización en recuperación post-parto y metabolismo hormonal",
-  "+200 clientes transformadas en 3+ países",
+  "+300 clientes transformadas en 3+ países",
   "Creadora del Método Gabifit — enfoque integrado cuerpo-mente",
   "Comunidad activa Tribu Gabifit",
 ];
 
 const STATS = [
-  ["+200", "MADRES TRANSFORMADAS"],
-  ["8", "AÑOS DE EXPERIENCIA"],
+  ["+300", "MADRES TRANSFORMADAS"],
+  ["9", "AÑOS DE EXPERIENCIA"],
   ["+3", "PAÍSES"],
 ];
 
@@ -123,7 +133,7 @@ export default function GabifitLanding() {
         <img
           src="https://res.cloudinary.com/dmkx2uowd/image/upload/q_auto/f_auto/v1775404908/GABIFIT_LOGO_VARIANTES_GABIFIT_copy_3_1_kjjzmf.png"
           alt="Gabifit"
-          className="h-12 md:h-16 drop-shadow-[0_0_15px_rgba(207,241,84,0.3)] hover:scale-105 transition-transform cursor-pointer"
+          className="h-24 md:h-32 drop-shadow-[0_0_15px_rgba(207,241,84,0.3)] hover:scale-105 transition-transform cursor-pointer"
         />
       </nav>
 
@@ -339,12 +349,13 @@ export default function GabifitLanding() {
               {/* Urgency block */}
               <div className="border-4 border-brand-neon p-6">
                 <p className="text-brand-neon font-mono text-sm normal-case leading-relaxed">
-                  ⚡ Este precio es SOLO hasta Mayo 30 (Día de las Madres).
+                  ⚡ Precio de lanzamiento: $97 (precio regular $147).
                   <br />
-                  El Junio 1 sube a $147 — sin excepciones.
+                  Pago único — acceso de por vida, incluyendo cada clase nueva
+                  que se publica.
                   <br />
-                  Los primeros 50 en unirse reciben acceso al Grupo VIP
-                  prioritario.
+                  Las primeras 50 en unirse entran al Grupo VIP prioritario con
+                  Gabi.
                 </p>
               </div>
             </div>
@@ -361,7 +372,9 @@ export default function GabifitLanding() {
                 PAGO ÚNICO / ACCESO DE POR VIDA
               </span>
               <a
-                href="#"
+                href={BUY_URL}
+                target={CHECKOUT_URL ? "_blank" : undefined}
+                rel={CHECKOUT_URL ? "noopener noreferrer" : undefined}
                 className="w-full bg-brand-black text-brand-neon py-6 text-2xl md:text-3xl font-heading text-center hover:bg-brand-white hover:text-brand-black transition-all duration-300 cursor-pointer block"
               >
                 → ACCEDER AHORA POR $97
@@ -399,13 +412,13 @@ export default function GabifitLanding() {
             </h2>
             <div className="bg-brand-white text-brand-black p-8 brutalist-shadow-neon mb-10">
               <p className="text-lg md:text-xl font-mono normal-case leading-relaxed">
-                Soy Gabi — entrenadora certificada con más de 8 años ayudando a
+                Soy Gabi — entrenadora con más de 9 años ayudando a
                 mujeres a transformar su cuerpo y su confianza.
                 <br />
                 <br />
                 Trabajo específicamente con mamás post-parto porque sé lo que
                 significa mirar tu cuerpo y no reconocerte. He acompañado a más
-                de 200 madres en República Dominicana, EEUU y más — a recuperar
+                de 300 madres en República Dominicana, EEUU y más — a recuperar
                 su figura, sí, pero sobre todo a recuperarse a sí mismas.
                 <br />
                 <br />
@@ -510,7 +523,7 @@ export default function GabifitLanding() {
             <img
               src="https://res.cloudinary.com/dmkx2uowd/image/upload/q_auto/f_auto/v1775404908/GABIFIT_LOGO_VARIANTES_GABIFIT_copy_3_1_kjjzmf.png"
               alt="Gabifit"
-              className="h-16 drop-shadow-[0_0_10px_rgba(207,241,84,0.2)] hover:scale-105 transition-transform cursor-pointer mb-8"
+              className="h-32 drop-shadow-[0_0_10px_rgba(207,241,84,0.2)] hover:scale-105 transition-transform cursor-pointer mb-8"
             />
             <p className="text-xs opacity-50 max-w-md normal-case leading-relaxed mb-4 font-mono">
               *Los resultados varían según el nivel de compromiso individual.
