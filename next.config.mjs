@@ -16,6 +16,11 @@ const nextConfig = {
       },
     ],
   },
+  // Incluye los PDFs protegidos en el bundle de la función que los sirve,
+  // para que readFile los encuentre en producción (Vercel).
+  outputFileTracingIncludes: {
+    "/api/guias/[file]": ["./protected/guias/**"],
+  },
 };
 
 export default nextConfig;

@@ -1,19 +1,17 @@
 import Image from "next/image";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import {
-  LESSONS,
   MEDICAL_DISCLAIMER,
   PHASES,
   cloudinaryPoster,
-  getLesson,
   guidesForPhase,
 } from "../../lessons";
+import { getLessonForView, getLessonCount } from "@/lib/lessons-db";
+import { getSessionMember } from "@/lib/session";
 import CompleteButton from "./CompleteButton";
 
-export function generateStaticParams() {
-  return LESSONS.map((l) => ({ id: String(l.id) }));
-}
+export const dynamic = "force-dynamic";
 
 const PHASE_TINT: Record<string, string> = {
   neon: "var(--neon)",
@@ -26,15 +24,19 @@ export default async function LessonPage({
 }: {
   params: Promise<{ id: string }>;
 }) {
+  const member = await getSessionMember();
+  if (!member) redirect("/masterclass");
+
   const { id } = await params;
   const lessonId = Number(id);
-  const lesson = getLesson(lessonId);
+  const lesson = await getLessonForView(lessonId);
   if (!lesson) notFound();
 
+  const total = await getLessonCount();
   const phase = PHASES.find((p) => p.id === lesson.phase)!;
   const guides = guidesForPhase(lesson.phase);
-  const prev = getLesson(lessonId - 1);
-  const next = getLesson(lessonId + 1);
+  const prev = await getLessonForView(lessonId - 1);
+  const next = await getLessonForView(lessonId + 1);
 
   return (
     <main className="pb-24">
@@ -48,7 +50,7 @@ export default async function LessonPage({
             ← Tu espacio
           </Link>
           <p className="font-meta text-[10px] text-[color:var(--ink-soft)] md:text-xs">
-            Lección {lesson.id} / {LESSONS.length}
+            Lección {lesson.id} / {total}
           </p>
         </div>
         <div className="rule-double" />
@@ -82,17 +84,17 @@ export default async function LessonPage({
 
         {/* Video / próximamente */}
         <section className="mt-10">
-          {lesson.videoUrl ? (
+          {lesson.playableUrl ? (
             <figure>
               <div className="plate bg-black">
                 <video
                   controls
                   playsInline
                   preload="metadata"
-                  poster={cloudinaryPoster(lesson.videoUrl)}
+                  poster={cloudinaryPoster(lesson.playableUrl)}
                   className="block h-auto w-full"
                 >
-                  <source src={lesson.videoUrl} type="video/mp4" />
+                  <source src={lesson.playableUrl} type="video/mp4" />
                   Tu navegador no puede reproducir este video.
                 </video>
               </div>
