@@ -128,13 +128,29 @@ export default function GabifitLanding() {
       </div>
 
       {/* ── NAVBAR ── */}
-      <nav className="bg-brand-black p-6 flex justify-center">
+      <nav className="bg-brand-black px-4 py-4 md:px-8 flex items-center justify-between">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="https://res.cloudinary.com/dmkx2uowd/image/upload/q_auto/f_auto/v1775404908/GABIFIT_LOGO_VARIANTES_GABIFIT_copy_3_1_kjjzmf.png"
-          alt="Gabifit"
-          className="h-24 md:h-32 drop-shadow-[0_0_15px_rgba(207,241,84,0.3)] hover:scale-105 transition-transform cursor-pointer"
-        />
+        <a href="/">
+          <img
+            src="https://res.cloudinary.com/dmkx2uowd/image/upload/q_auto/f_auto/v1775404908/GABIFIT_LOGO_VARIANTES_GABIFIT_copy_3_1_kjjzmf.png"
+            alt="Gabifit"
+            className="h-16 md:h-24 drop-shadow-[0_0_15px_rgba(207,241,84,0.3)] hover:scale-105 transition-transform cursor-pointer"
+          />
+        </a>
+        <div className="flex items-center gap-3 md:gap-4">
+          <a
+            href="/masterclass"
+            className="font-heading text-sm md:text-xl text-brand-white hover:text-brand-neon transition-colors"
+          >
+            ENTRAR
+          </a>
+          <a
+            href="/masterclass/registro"
+            className="bg-brand-neon text-brand-black px-4 py-2 md:px-6 md:py-3 font-heading text-sm md:text-xl brutalist-shadow-white hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all"
+          >
+            REGISTRARME
+          </a>
+        </div>
       </nav>
 
       {/* ── HERO ── */}
