@@ -95,7 +95,7 @@ export default function MommyGardenBrunch() {
       <nav className={`navbar${scrolled ? " scrolled" : ""}`} id="navbar">
         <div className="container navbar__inner">
           <a href="#" className="navbar__logo">
-            <img src="/assets/logo-dark.png" alt="GabiFit" />
+            <img src="/logo-ink.png" alt="GabiFit" />
           </a>
           <a href="#tickets" className="btn btn-yellow navbar__cta">
             Reservar mi entrada →
@@ -669,7 +669,7 @@ export default function MommyGardenBrunch() {
       <footer className="footer">
         <div className="container footer__inner">
           <div className="footer__logo">
-            <img src="/assets/logo-yellow.png" alt="GabiFit" />
+            <img src="https://res.cloudinary.com/dmkx2uowd/image/upload/v1781725677/logo-yellow_ujv3gc.png" alt="GabiFit" />
           </div>
           <p className="footer__tagline">&quot;Hoy te eliges a ti.&quot; 🌸</p>
           <div className="footer__social">
