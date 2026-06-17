@@ -9,8 +9,10 @@ export const LOGO_URL =
 // Logo en tinta (fondo transparente) para el papel crema del portal
 export const LOGO_INK = "/assets/logo-ink.png";
 
-// Fotos reales de Gabi (sesión de estudio usada en el evento)
-export const GABI_PHOTO = "/assets/mama-y-coach.jpeg";
+// Foto de Gabi usada en el portal (login + registro). Servida desde Cloudinary
+// para que cargue en producción sin depender de /public.
+export const GABI_PHOTO =
+  "https://res.cloudinary.com/dmkx2uowd/image/upload/v1781725390/madre_cansada_cjyou1.jpg";
 export const GABI_CUTOUT = "/assets/gabi-cutout.webp";
 
 export const WHATSAPP_HELP_URL =

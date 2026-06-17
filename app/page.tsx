@@ -215,7 +215,7 @@ export default function GabifitLanding() {
           <div className="brutalist-border overflow-hidden">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/assets/madre_cansada.png"
+              src="https://res.cloudinary.com/dmkx2uowd/image/upload/v1781725390/madre_cansada_cjyou1.jpg"
               alt="Madre post-parto"
               className="w-full h-auto grayscale brightness-75 contrast-150"
             />
@@ -412,13 +412,12 @@ export default function GabifitLanding() {
       <section className="py-32 px-4 md:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start max-w-7xl mx-auto">
           <div className="lg:col-span-5 brutalist-border brutalist-shadow-purple -rotate-2 overflow-hidden">
-            {/*
-              Copia el video del coach a: nextjs-ready/public/coach-video.mp4
-              (el archivo original es: Child_walking_toward_202603252024.mp4)
-            */}
-            <video autoPlay loop muted playsInline className="w-full h-auto block">
-              <source src="/coach-video.mp4" type="video/mp4" />
-            </video>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="https://res.cloudinary.com/dmkx2uowd/image/upload/v1781725390/madre_cansada_cjyou1.jpg"
+              alt="Gabi, tu coach"
+              className="w-full h-auto block"
+            />
           </div>
           <div className="lg:col-span-7 pt-12">
             <h2 className="text-5xl md:text-8xl mb-8 italic leading-none">
