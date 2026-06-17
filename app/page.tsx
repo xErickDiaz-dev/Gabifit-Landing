@@ -414,7 +414,7 @@ export default function GabifitLanding() {
           <div className="lg:col-span-5 brutalist-border brutalist-shadow-purple -rotate-2 overflow-hidden">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="https://res.cloudinary.com/dmkx2uowd/image/upload/v1781725390/madre_cansada_cjyou1.jpg"
+              src="/gabi-coach.jpeg"
               alt="Gabi, tu coach"
               className="w-full h-auto block"
             />
