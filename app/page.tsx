@@ -132,7 +132,7 @@ export default function GabifitLanding() {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <a href="/">
           <img
-            src="https://res.cloudinary.com/dmkx2uowd/image/upload/q_auto/f_auto/v1775404908/GABIFIT_LOGO_VARIANTES_GABIFIT_copy_3_1_kjjzmf.png"
+            src="https://res.cloudinary.com/dmkx2uowd/image/upload/v1781725677/logo-yellow_ujv3gc.png"
             alt="Gabifit"
             className="h-16 md:h-24 drop-shadow-[0_0_15px_rgba(207,241,84,0.3)] hover:scale-105 transition-transform cursor-pointer"
           />
@@ -536,7 +536,7 @@ export default function GabifitLanding() {
           <div>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="https://res.cloudinary.com/dmkx2uowd/image/upload/q_auto/f_auto/v1775404908/GABIFIT_LOGO_VARIANTES_GABIFIT_copy_3_1_kjjzmf.png"
+              src="https://res.cloudinary.com/dmkx2uowd/image/upload/v1781725677/logo-yellow_ujv3gc.png"
               alt="Gabifit"
               className="h-32 drop-shadow-[0_0_10px_rgba(207,241,84,0.2)] hover:scale-105 transition-transform cursor-pointer mb-8"
             />

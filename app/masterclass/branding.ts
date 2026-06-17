@@ -6,8 +6,9 @@
 export const LOGO_URL =
   "https://res.cloudinary.com/dmkx2uowd/image/upload/q_auto/f_auto/v1775404908/GABIFIT_LOGO_VARIANTES_GABIFIT_copy_3_1_kjjzmf.png";
 
-// Logo en tinta (fondo transparente) para el papel crema del portal
-export const LOGO_INK = "/assets/logo-ink.png";
+// Logo en tinta (navy + rayo neón) para el papel crema del portal. Vive en
+// public/ (no en public/assets/, que el .vercelignore excluye) para cargar en prod.
+export const LOGO_INK = "/logo-ink.png";
 
 // Foto real de Gabi (login + registro). Vive en public/ (no en public/assets/,
 // que el .vercelignore excluye por su peso), por eso carga en producción.
