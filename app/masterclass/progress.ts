@@ -37,11 +37,17 @@ export function useProgress() {
 
   const toggle = useCallback((id: number) => {
     const current = read();
-    const next = current.includes(id)
-      ? current.filter((x) => x !== id)
-      : [...current, id];
+    const isAdding = !current.includes(id);
+    const next = isAdding ? [...current, id] : current.filter((x) => x !== id);
     localStorage.setItem(KEY, JSON.stringify(next));
     window.dispatchEvent(new Event(EVENT));
+    // Sincroniza al servidor para que el panel de Gabi vea el avance.
+    // Best-effort: si la red falla, el check local se mantiene igual.
+    fetch("/api/progress", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ lessonId: id, done: isAdding }),
+    }).catch(() => {});
   }, []);
 
   return { completed, toggle, loaded };
