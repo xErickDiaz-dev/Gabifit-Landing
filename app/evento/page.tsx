@@ -141,7 +141,7 @@ export default function MommyGardenBrunch() {
           <div className="hero__visual">
             <div className="hero__img-frame">
               <img
-                src="/assets/mama-y-coach.jpeg"
+                src="/assets/mama-y-coach.webp"
                 alt="Gaby — GabiFit Coach"
                 className="hero__img"
               />
@@ -201,7 +201,7 @@ export default function MommyGardenBrunch() {
               </p>
               <div className="why__quote-author">
                 <img
-                  src="/assets/mama-y-coach.jpeg"
+                  src="/assets/mama-y-coach.webp"
                   alt="Gaby"
                   className="why__quote-avatar"
                 />
@@ -264,7 +264,7 @@ export default function MommyGardenBrunch() {
                   <SlideNav />
                 </div>
                 <div className="slide__photo">
-                  <img src="/assets/mama-y-coach.jpeg" alt="Gaby — GabiFit" />
+                  <img src="/assets/mama-y-coach.webp" alt="Gaby — GabiFit" />
                   <div className="slide__photo-overlay"></div>
                   <span className="slide__photo-tag">Anfitriona</span>
                 </div>
@@ -301,7 +301,7 @@ export default function MommyGardenBrunch() {
                   <SlideNav />
                 </div>
                 <div className="slide__photo">
-                  <img src="/assets/maria-espinal.jpeg" alt="Maríah Espinal" />
+                  <img src="/assets/maria-espinal.webp" alt="Maríah Espinal" />
                   <div className="slide__photo-overlay"></div>
                   <span className="slide__photo-tag">Invitada especial</span>
                 </div>
@@ -437,14 +437,14 @@ export default function MommyGardenBrunch() {
 
           <div className="exp-mosaic">
             {[
-              ["shot_on_iPhone_202604041321.png", "Mommy Garden Brunch"],
-              ["Latina_women_in_202604041256.png", "Mujeres en el evento"],
-              ["Latina_women_in_202604041256 (1).png", "Mujeres en el evento"],
-              ["realistic_candid_photo_202604041322.png", "Momento de conexión"],
-              ["realistic_candid_photo_202604041323.png", "Experiencia del evento"],
-              ["candid_photo_of_202604041357.png", "Comunidad GabiFit"],
-              ["quiero_que_le_202604041359.png", "Bienestar y conexión"],
-              ["slight_grain,_subtle_202604041400.png", "Tarde de bienestar"],
+              ["evento-1.webp", "Mommy Garden Brunch"],
+              ["evento-2.webp", "Mujeres en el evento"],
+              ["evento-3.webp", "Mujeres en el evento"],
+              ["evento-4.webp", "Momento de conexión"],
+              ["evento-5.webp", "Experiencia del evento"],
+              ["evento-6.webp", "Comunidad GabiFit"],
+              ["evento-7.webp", "Bienestar y conexión"],
+              ["evento-8.webp", "Tarde de bienestar"],
             ].map(([file, alt]) => (
               <div key={file} className="exp-mosaic__item">
                 <img src={`/assets/${file}`} alt={alt} />
@@ -558,10 +558,10 @@ export default function MommyGardenBrunch() {
           </div>
           <div className="venue__gallery">
             <div className="venue__gallery-main">
-              <img src="/assets/Restaurantgabifit.jpg" alt="Monarca Bistro — Lugar del evento" />
+              <img src="/assets/restaurante-monarca.webp" alt="Monarca Bistro — Lugar del evento" />
             </div>
             <div className="venue__gallery-side">
-              <img src="/assets/Gabifitlugarevento.jpg" alt="Espacio garden del evento" />
+              <img src="/assets/lugar-evento.webp" alt="Espacio garden del evento" />
             </div>
           </div>
         </div>

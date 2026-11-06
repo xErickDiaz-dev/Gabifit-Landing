@@ -1,0 +1,25 @@
+# Qué NO sube a Vercel.
+#
+# OJO con la barra inicial: va a propósito. Un "assets/" suelto casa con
+# CUALQUIER carpeta llamada assets, incluida public/assets/, y eso dejaba la
+# página del evento sin una sola foto en producción. Con "/assets/" sólo se
+# excluye la carpeta de la raíz, que es la de los originales.
+
+# Originales y material de trabajo — la app no los sirve.
+/asset/
+/assets/
+/_agents/
+/docs/
+/Brand identitiy/
+/nextjs-ready/
+/stitch_plan_de_dise_o_gabifit_landing_page (1)/
+/mailerlite-emails/
+/evento/
+/.leads/
+
+# Videos pesados: van a un CDN, no dentro del bundle.
+/public/testimonios/*.mp4
+
+# Artefactos locales
+/.next
+/.agent
