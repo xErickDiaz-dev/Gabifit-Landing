@@ -39,3 +39,6 @@ assets/*.MOV
 assets/*.mov
 assets/*.mp4
 asset/*.mp4
+
+# Worktrees y estado de Claude Code — herramienta local, no es del proyecto.
+.claude/

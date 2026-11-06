@@ -102,7 +102,7 @@ No vas a hacer esto sola. La Tribu Gabifit es una comunidad de madres reales que
 
 **Estadísticas de credibilidad:**
 ```
-+200 MADRES TRANSFORMADAS  ·  8 AÑOS DE EXPERIENCIA  ·  +3 PAÍSES
++300 MADRES TRANSFORMADAS  ·  9 AÑOS DE EXPERIENCIA  ·  +3 PAÍSES
 ```
 
 ---
@@ -241,11 +241,11 @@ TU COACH: GABI FIT
 
 **Bio (texto principal):**
 ```
-Soy Gabi — entrenadora certificada con más de 8 años ayudando a mujeres a transformar su cuerpo y su confianza.
+Soy Gabi — entrenadora con más de 9 años ayudando a mujeres a transformar su cuerpo y su confianza.
 
 Trabajo específicamente con mamás post-parto porque sé lo que significa mirar tu cuerpo y no reconocerte. Sé lo que es el cansancio real, la falta de tiempo y la sensación de que "esto no es para mí."
 
-He acompañado a más de 200 madres en República Dominicana, EEUU y más — a recuperar su figura, sí, pero sobre todo a recuperarse a sí mismas.
+He acompañado a más de 300 madres en República Dominicana, EEUU y más — a recuperar su figura, sí, pero sobre todo a recuperarse a sí mismas.
 
 Este programa no es genérico. Está construido desde el conocimiento real de cómo funciona el cuerpo de una mamá — y desde el respeto profundo por lo que representa la maternidad.
 
@@ -254,9 +254,9 @@ Aquí no se trata solo de bajar de peso. Se trata de volver a ser tú.
 
 **Credenciales (lista):**
 ```
-✅ 8+ años de experiencia en fitness femenino
+✅ 9+ años de experiencia en fitness femenino
 ✅ Especialización en recuperación post-parto y metabolismo hormonal
-✅ +200 clientes transformadas en 3+ países
+✅ +300 clientes transformadas en 3+ países
 ✅ Creadora del Método Gabifit — enfoque integrado cuerpo-mente
 ✅ Comunidad activa Tribu Gabifit
 ```
