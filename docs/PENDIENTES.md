@@ -55,7 +55,11 @@ de Firebase Storage del proyecto. Sería más ordenado tenerlos todos en el mism
 sitio, pero no hay credenciales de API de Cloudinary en el repo — sólo se ha
 subido a mano por su web.
 
-**El build local no termina.** `next/font` falla al pedir las fuentes de Google
-desde esta máquina. No es de esta rama: falla igual quitando `app/coaching`, y
-con la misma configuración de fuentes que ya está en producción. En Vercel
-compila. Para verificar en local: `npm test` y `npx tsc --noEmit`.
+**Las fuentes se sirven desde el repo, no desde Google.** Estaban con
+`next/font/google` y el build dejó de compilar — en local y en Vercel por
+igual, en fuentes que nadie había tocado. Ahora los woff2 viven en `app/fonts/`
+y se cargan con `next/font/local` desde `app/fonts.ts`. Si alguna vez hay que
+añadir una familia o un peso, se baja el woff2 ahí y se añade al `src`; no se
+vuelve a `next/font/google`.
+
+Para verificar en local: `npm run build`, `npm test` y `npx tsc --noEmit`.
