@@ -16,6 +16,9 @@ next-env.d.ts
 .env.local
 .env.*.local
 
+# lead capture local storage (fallback when MailerLite isn't wired)
+.leads/
+
 # OS
 .DS_Store
 Thumbs.db
@@ -27,3 +30,12 @@ nextjs-ready/
 asset/elaine-zapata.mp4
 public/testimonios/*.mp4
 
+
+.vercel
+
+# Material crudo de video (cientos de MB). Los JPG/PNG originales de assets/ sí
+# están versionados a propósito; lo que nunca entra es el video sin editar.
+assets/*.MOV
+assets/*.mov
+assets/*.mp4
+asset/*.mp4

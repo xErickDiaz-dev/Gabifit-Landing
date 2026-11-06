@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Ejercicios Seguros en el Embarazo | Gabifit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Roboto+Mono:wght@400;700&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  @page { size: Letter; margin: 0; }
+  @media print { body { -webkit-print-color-adjust: exact; print-color-adjust: exact; } }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root { --neon: #cff154; --purple: #c4b5fd; --black: #000; --white: #fff; --ink: #111; }
+  html, body { font-family: 'Space Grotesk', sans-serif; color: var(--ink); background: var(--white); line-height: 1.5; }
+  h1, h2, h3, h4 { font-family: 'Oswald', sans-serif; text-transform: uppercase; letter-spacing: -0.02em; line-height: 1; }
+  .mono { font-family: 'Roboto Mono', monospace; }
+
+  .page { width: 8.5in; height: 11in; padding: 0.75in; page-break-after: always; position: relative; overflow: hidden; }
+  .page:last-child { page-break-after: auto; }
+  .page-num { position: absolute; bottom: 0.4in; right: 0.6in; font-family: 'Roboto Mono', monospace; font-size: 9pt; opacity: 0.5; }
+  .footer-brand { position: absolute; bottom: 0.4in; left: 0.6in; font-family: 'Oswald', sans-serif; font-size: 9pt; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.5; }
+
+  /* COVER */
+  .cover { background: var(--black); color: var(--white); display: flex; flex-direction: column; justify-content: space-between; }
+  .cover .badge { display: inline-block; background: var(--neon); color: var(--black); padding: 8px 14px; font-family: 'Oswald', sans-serif; font-size: 11pt; text-transform: uppercase; letter-spacing: 0.05em; align-self: flex-start; }
+  .cover h1 { font-size: 60pt; color: var(--white); margin-top: 0.3in; }
+  .cover h1 .accent { color: var(--neon); font-style: italic; }
+  .cover .sub { font-size: 13pt; margin-top: 0.4in; line-height: 1.4; max-width: 5.5in; opacity: 0.85; }
+  .cover .author { margin-top: auto; border-top: 4px solid var(--neon); padding-top: 18px; }
+  .cover .author .name { font-family: 'Oswald', sans-serif; font-size: 14pt; text-transform: uppercase; letter-spacing: 0.05em; }
+  .cover .author .stats { font-family: 'Roboto Mono', monospace; font-size: 10pt; margin-top: 6px; opacity: 0.7; text-transform: uppercase; }
+
+  /* INTERIOR */
+  .eyebrow { font-family: 'Oswald', sans-serif; font-size: 11pt; text-transform: uppercase; letter-spacing: 0.15em; opacity: 0.5; margin-bottom: 12px; }
+  .h2-display { font-size: 48pt; line-height: 0.95; }
+  .h2-display .accent { color: var(--neon); -webkit-text-stroke: 1px var(--ink); }
+  .h2-display .ital { font-style: italic; opacity: 0.6; }
+  .body-text { font-size: 11pt; line-height: 1.55; margin-top: 16px; }
+  .body-text p + p { margin-top: 10px; }
+  .rule-block { margin-top: 18px; padding: 14px 16px; border-left: 6px solid var(--neon); background: #fafafa; }
+  .rule-block.warning { border-left-color: #d92424; background: #fff5f5; }
+  .rule-block .rule-num { font-family: 'Oswald', sans-serif; font-size: 10pt; opacity: 0.5; }
+  .rule-block .rule-text { font-size: 12pt; margin-top: 4px; font-weight: 700; }
+  .disclaimer { padding: 16px; border: 3px solid var(--ink); background: var(--neon); color: var(--ink); margin-top: 24px; font-family: 'Roboto Mono', monospace; font-size: 9.5pt; line-height: 1.55; font-weight: 700; }
+  .disclaimer strong { display: block; font-size: 10.5pt; margin-bottom: 6px; text-transform: uppercase; }
+
+  /* TRIMESTER PAGES */
+  .trim-header { border-bottom: 4px solid var(--ink); padding-bottom: 14px; margin-bottom: 24px; }
+  .trim-label { font-family: 'Oswald', sans-serif; font-size: 11pt; text-transform: uppercase; letter-spacing: 0.15em; opacity: 0.6; }
+  .trim-name { font-family: 'Oswald', sans-serif; font-size: 52pt; text-transform: uppercase; line-height: 1; margin-top: 4px; }
+  .trim-name .accent { color: var(--neon); -webkit-text-stroke: 1.5px var(--ink); }
+  .trim-meta { font-family: 'Roboto Mono', monospace; font-size: 10pt; margin-top: 8px; opacity: 0.7; }
+
+  .exercise { display: grid; grid-template-columns: 0.5in 1fr; gap: 14px; padding: 14px 0; border-bottom: 1px solid #ddd; align-items: start; }
+  .exercise:last-child { border-bottom: none; }
+  .ex-num { font-family: 'Oswald', sans-serif; font-size: 28pt; line-height: 1; color: var(--ink); -webkit-text-stroke: 1px var(--ink); -webkit-text-fill-color: transparent; }
+  .ex-name { font-family: 'Oswald', sans-serif; font-size: 16pt; text-transform: uppercase; line-height: 1; }
+  .ex-desc { font-size: 10pt; line-height: 1.45; margin-top: 6px; }
+  .ex-tags { font-family: 'Roboto Mono', monospace; font-size: 9pt; margin-top: 6px; opacity: 0.7; text-transform: uppercase; letter-spacing: 0.05em; }
+
+  .trim-tip { margin-top: 22px; padding: 16px; background: var(--purple); color: var(--black); }
+  .trim-tip h4 { font-size: 13pt; margin-bottom: 6px; }
+  .trim-tip p { font-family: 'Roboto Mono', monospace; font-size: 10pt; line-height: 1.55; }
+
+  /* AVOID PAGE */
+  .avoid-grid { display: flex; flex-direction: column; gap: 12px; margin-top: 22px; }
+  .avoid-item { display: grid; grid-template-columns: 36pt 1fr; gap: 12px; padding: 12px 14px; border: 2px solid var(--ink); }
+  .avoid-x { font-family: 'Oswald', sans-serif; font-size: 24pt; line-height: 1; color: #d92424; }
+  .avoid-name { font-family: 'Oswald', sans-serif; font-size: 14pt; text-transform: uppercase; line-height: 1; }
+  .avoid-why { font-size: 10pt; margin-top: 4px; line-height: 1.45; }
+
+  /* PLAN PAGE */
+  .plan-table { width: 100%; border-collapse: collapse; margin-top: 22px; }
+  .plan-table th { background: var(--black); color: var(--white); padding: 10px 12px; font-family: 'Oswald', sans-serif; font-size: 10pt; text-align: left; text-transform: uppercase; letter-spacing: 0.1em; }
+  .plan-table td { padding: 12px; border-bottom: 1px solid #ddd; font-size: 10.5pt; vertical-align: top; }
+  .plan-table td.day { font-family: 'Oswald', sans-serif; text-transform: uppercase; font-size: 12pt; width: 1.4in; }
+  .plan-table tr:nth-child(even) td { background: #fafafa; }
+
+  /* CTA */
+  .cta-page { background: var(--black); color: var(--white); display: flex; flex-direction: column; justify-content: center; text-align: center; }
+  .cta-page h2 { color: var(--white); font-size: 56pt; margin-bottom: 24px; }
+  .cta-page h2 .accent { color: var(--neon); }
+  .cta-page p { font-size: 13pt; line-height: 1.5; max-width: 5.5in; margin: 0 auto 18px; }
+  .cta-blocks { display: flex; flex-direction: column; gap: 14px; margin-top: 36px; max-width: 5.5in; margin-left: auto; margin-right: auto; }
+  .cta-block { background: var(--neon); color: var(--black); padding: 18px 22px; text-align: left; }
+  .cta-block.alt { background: var(--purple); }
+  .cta-block .label { font-family: 'Oswald', sans-serif; font-size: 11pt; text-transform: uppercase; letter-spacing: 0.1em; }
+  .cta-block .headline { font-family: 'Oswald', sans-serif; font-size: 22pt; text-transform: uppercase; margin-top: 4px; line-height: 1; }
+  .cta-block .url { font-family: 'Roboto Mono', monospace; font-size: 10pt; margin-top: 6px; }
+  .cta-page .signature { margin-top: 36px; font-family: 'Oswald', sans-serif; font-size: 14pt; text-transform: uppercase; color: var(--neon); }
+  .cta-page .signature span { display: block; color: var(--white); font-family: 'Roboto Mono', monospace; font-size: 9pt; margin-top: 4px; letter-spacing: 0.1em; }
+</style>
+</head>
+<body>
+
+<!-- ════════════ PAGE 1 — COVER ════════════ -->
+<section class="page cover">
+  <div><span class="badge">GUÍA GRATIS · DESCARGA OFICIAL</span></div>
+  <div>
+    <h1>
+      EJERCICIOS<br>
+      SEGUROS EN<br>
+      EL <span class="accent">EMBARAZO</span>.
+    </h1>
+    <p class="sub">
+      La guía práctica que toda mamá embarazada necesita: qué hacer, qué evitar, cómo respirar, cómo proteger tu suelo pélvico — trimestre por trimestre. Sin miedo, con dirección.
+    </p>
+  </div>
+  <div class="author">
+    <div class="name">Por Gabi Fit · @gabifitrd</div>
+    <div class="stats">+9 años entrenando · +300 mamás acompañadas · Santiago, RD</div>
+  </div>
+</section>
+
+<!-- ════════════ PAGE 2 — BIENVENIDA + DISCLAIMER ════════════ -->
+<section class="page">
+  <div class="eyebrow">— Bienvenida</div>
+  <h2 class="h2-display">
+    PRIMERO LO<br>
+    <span class="accent">MÁS</span><br>
+    IMPORTANTE.
+  </h2>
+
+  <div class="body-text">
+    <p>Soy Gabi. Llevo más de 9 años entrenando mujeres y +300 mamás conmigo. Y la pregunta que más me hacen las embarazadas es esta: <strong>"¿Puedo seguir entrenando?"</strong></p>
+    <p>La respuesta corta: <strong>casi siempre sí, con luz verde de tu médico y los ajustes correctos.</strong> El embarazo no es una enfermedad. Es una etapa donde tu cuerpo está haciendo el trabajo más exigente de su vida — y mantenerlo fuerte ayuda al parto, a la recuperación postparto y a tu energía día a día.</p>
+    <p>Esta guía te da el qué, el cómo y el qué evitar. Pero hay una regla antes de todo:</p>
+  </div>
+
+  <div class="disclaimer">
+    <strong>⚠️ Antes de empezar — sin excepción</strong>
+    Habla con tu obstetra o médico. Esta guía es educativa, no es prescripción médica. Si tu embarazo tiene cualquier complicación (placenta previa, sangrado, preeclampsia, riesgo de parto pretérmino, etc.) — NO uses esta guía sin autorización médica explícita.
+  </div>
+
+  <div class="rule-block">
+    <div class="rule-num">REGLA 01</div>
+    <div class="rule-text">Si te falta el aire al hablar, baja la intensidad. La regla del "talk test" manda.</div>
+  </div>
+  <div class="rule-block">
+    <div class="rule-num">REGLA 02</div>
+    <div class="rule-text">Hidrátate como nunca. 3 litros mínimo en días de entrenamiento.</div>
+  </div>
+  <div class="rule-block">
+    <div class="rule-num">REGLA 03</div>
+    <div class="rule-text">Si algo duele, para. Molestia es OK; dolor agudo nunca.</div>
+  </div>
+
+  <div class="footer-brand">GABIFIT · EMBARAZO</div>
+  <div class="page-num">02</div>
+</section>
+
+<!-- ════════════ PAGE 3 — CÓMO USARLA ════════════ -->
+<section class="page">
+  <div class="eyebrow">— Cómo usarla</div>
+  <h2 class="h2-display">
+    LA GUÍA EN<br>
+    <span class="ital">3 PARTES.</span>
+  </h2>
+
+  <div class="body-text">
+    <p>Cada trimestre tiene su propio set de ejercicios. No te brincas trimestres — usa el que estás viviendo ahora. A medida que avances, repites ejercicios pero ajustas intensidad y rangos.</p>
+  </div>
+
+  <div class="rule-block">
+    <div class="rule-num">PARTE 01 — TRIMESTRE 1 (semanas 1–13)</div>
+    <div class="rule-text">Energía baja, náuseas. Movimiento gentil, pelvic floor y respiración. Cardio bajo.</div>
+  </div>
+  <div class="rule-block">
+    <div class="rule-num">PARTE 02 — TRIMESTRE 2 (semanas 14–27)</div>
+    <div class="rule-text">El "sweet spot". Energía vuelve, panza no estorba aún. Fuerza moderada.</div>
+  </div>
+  <div class="rule-block">
+    <div class="rule-num">PARTE 03 — TRIMESTRE 3 (semanas 28+)</div>
+    <div class="rule-text">Movilidad, preparación para el parto, suelo pélvico, caminar.</div>
+  </div>
+
+  <div class="rule-block">
+    <div class="rule-num">FRECUENCIA SUGERIDA</div>
+    <div class="rule-text">3–4 sesiones por semana de 20–35 min. Más vale corto y constante que largo y abandonado.</div>
+  </div>
+
+  <div class="rule-block">
+    <div class="rule-num">EQUIPO MÍNIMO</div>
+    <div class="rule-text">Tapete, una banda elástica, dos mancuernas livianas (3–8 lb). Una silla. Eso es todo.</div>
+  </div>
+
+  <div class="footer-brand">GABIFIT · EMBARAZO</div>
+  <div class="page-num">03</div>
+</section>
+
+<!-- ════════════ PAGE 4 — TRIMESTRE 1 ════════════ -->
+<section class="page">
+  <div class="trim-header">
+    <div class="trim-label">— Trimestre 01</div>
+    <div class="trim-name">SEMANAS 1–13 <span class="accent">.</span></div>
+    <div class="trim-meta">Lema: gentil. La meta es mantener actividad sin agotarte.</div>
+  </div>
+
+  <div class="exercise">
+    <div class="ex-num">01</div>
+    <div>
+      <div class="ex-name">Caminar a paso firme</div>
+      <div class="ex-desc">El ejercicio más subestimado del embarazo. 25–35 min, ritmo donde puedes hablar pero no cantar. Si tienes náuseas, hazlo después de comer algo ligero.</div>
+      <div class="ex-tags">5×/semana · 25–35 min</div>
+    </div>
+  </div>
+
+  <div class="exercise">
+    <div class="ex-num">02</div>
+    <div>
+      <div class="ex-name">Respiración diafragmática</div>
+      <div class="ex-desc">Acostada de lado o sentada. Mano en panza, mano en pecho. Inhala 4 segundos por la nariz expandiendo el abdomen, exhala 6 segundos por la boca. Es la base del trabajo de suelo pélvico.</div>
+      <div class="ex-tags">Diario · 5–10 min</div>
+    </div>
+  </div>
+
+  <div class="exercise">
+    <div class="ex-num">03</div>
+    <div>
+      <div class="ex-name">Sentadilla a silla</div>
+      <div class="ex-desc">De pie, pies al ancho de cadera. Baja como si te fueras a sentar en una silla detrás. Toca apenas y vuelve a subir. Mantén el peso en los talones.</div>
+      <div class="ex-tags">3×/semana · 3 series × 10 reps</div>
+    </div>
+  </div>
+
+  <div class="exercise">
+    <div class="ex-num">04</div>
+    <div>
+      <div class="ex-name">Activación de suelo pélvico (Kegels guiados)</div>
+      <div class="ex-desc">Sentada o acostada de lado. Imagina que estás conteniendo el pipí — aprieta esos músculos 3 segundos, suelta 3 segundos. NO contraigas glúteos ni abdomen. Solo el suelo pélvico.</div>
+      <div class="ex-tags">Diario · 3 series × 10 reps</div>
+    </div>
+  </div>
+
+  <div class="trim-tip">
+    <h4>SEÑALES PARA PARAR EN T1</h4>
+    <p>Sangrado, contracciones, dolor pélvico agudo, mareo persistente, dificultad para respirar al hablar. Si algo de esto pasa: para y llama a tu médico.</p>
+  </div>
+
+  <div class="footer-brand">GABIFIT · EMBARAZO</div>
+  <div class="page-num">04</div>
+</section>
+
+<!-- ════════════ PAGE 5 — TRIMESTRE 2 ════════════ -->
+<section class="page">
+  <div class="trim-header">
+    <div class="trim-label">— Trimestre 02</div>
+    <div class="trim-name">SEMANAS 14–27 <span class="accent">.</span></div>
+    <div class="trim-meta">Lema: aprovecha. Energía vuelve, panza no estorba. Fuerza moderada.</div>
+  </div>
+
+  <div class="exercise">
+    <div class="ex-num">01</div>
+    <div>
+      <div class="ex-name">Sentadilla con mancuernas</div>
+      <div class="ex-desc">Mancuernas (3–8 lb) en los hombros o sostenidas en pecho. Sentadilla controlada bajando hasta donde te sea cómodo. La fuerza de piernas es oro para el parto y postparto.</div>
+      <div class="ex-tags">3×/semana · 3 series × 12 reps</div>
+    </div>
+  </div>
+
+  <div class="exercise">
+    <div class="ex-num">02</div>
+    <div>
+      <div class="ex-name">Remo con banda en banco/silla</div>
+      <div class="ex-desc">Sentada en una silla, banda elástica anclada delante de ti (a la altura del pecho). Hala los codos hacia atrás manteniendo espalda recta. Trabaja los músculos que las embarazadas más necesitan: la espalda alta.</div>
+      <div class="ex-tags">3×/semana · 3 series × 12 reps</div>
+    </div>
+  </div>
+
+  <div class="exercise">
+    <div class="ex-num">03</div>
+    <div>
+      <div class="ex-name">Plancha lateral modificada</div>
+      <div class="ex-desc">De lado, antebrazo en el suelo, rodilla inferior en el suelo. Levanta la cadera. Mantén 10–20 segundos. Trabaja core sin presión sobre el recto abdominal (clave para prevenir diástasis).</div>
+      <div class="ex-tags">3×/semana · 3 series × 20 segundos cada lado</div>
+    </div>
+  </div>
+
+  <div class="exercise">
+    <div class="ex-num">04</div>
+    <div>
+      <div class="ex-name">Glute bridge (puente de glúteos)</div>
+      <div class="ex-desc">Acostada boca arriba con rodillas dobladas, pies en el suelo. Empuja con los talones y levanta la cadera. Aprieta glúteos arriba 2 segundos, baja. <strong>Después de la semana 20:</strong> hazlo en banco/silla en vez de boca arriba.</div>
+      <div class="ex-tags">3×/semana · 3 series × 15 reps</div>
+    </div>
+  </div>
+
+  <div class="trim-tip">
+    <h4>POR QUÉ ESTE TRIMESTRE ES EL MÁS IMPORTANTE</h4>
+    <p>La fuerza que construyes ahora es la que vas a usar para parir y para cargar al bebé. Las mamás que entrenan en T2 reportan partos más cortos y postparto más rápido.</p>
+  </div>
+
+  <div class="footer-brand">GABIFIT · EMBARAZO</div>
+  <div class="page-num">05</div>
+</section>
+
+<!-- ════════════ PAGE 6 — TRIMESTRE 3 ════════════ -->
+<section class="page">
+  <div class="trim-header">
+    <div class="trim-label">— Trimestre 03</div>
+    <div class="trim-name">SEMANAS 28+ <span class="accent">.</span></div>
+    <div class="trim-meta">Lema: prepárate. Movilidad, suelo pélvico, caminar. Menos peso, más constancia.</div>
+  </div>
+
+  <div class="exercise">
+    <div class="ex-num">01</div>
+    <div>
+      <div class="ex-name">Caminar 30 min diario</div>
+      <div class="ex-desc">El mejor cardio que puedes hacer ahora. Plano, ritmo cómodo. Si te cansas a los 15 min, divide: 15 mañana, 15 tarde. Sirve igual.</div>
+      <div class="ex-tags">7×/semana · 30 min</div>
+    </div>
+  </div>
+
+  <div class="exercise">
+    <div class="ex-num">02</div>
+    <div>
+      <div class="ex-name">Sentadilla profunda con apoyo</div>
+      <div class="ex-desc">De pie frente a una pared, apoya las manos. Baja en sentadilla profunda, separa las rodillas. Mantén 30 segundos. Abre la cadera y prepara la pelvis para el parto.</div>
+      <div class="ex-tags">Diario · 3 series × 30 segundos</div>
+    </div>
+  </div>
+
+  <div class="exercise">
+    <div class="ex-num">03</div>
+    <div>
+      <div class="ex-name">Gato-vaca en cuatro puntos</div>
+      <div class="ex-desc">En cuatro puntos. Inhala arqueando la espalda hacia abajo (vaca), exhala redondeando hacia arriba (gato). Movimiento lento. Alivia dolor lumbar, mueve al bebé a posición.</div>
+      <div class="ex-tags">Diario · 3 series × 10 reps</div>
+    </div>
+  </div>
+
+  <div class="exercise">
+    <div class="ex-num">04</div>
+    <div>
+      <div class="ex-name">Suelo pélvico — relajación</div>
+      <div class="ex-desc">En T3 cambiamos la lógica: ya no fortalecemos contrayendo, sino que practicamos relajar. Inhala, expande el suelo pélvico hacia abajo (sentirás como si "soltaras"). Exhala, cierra suave. Esto es lo que hará el parto más fácil.</div>
+      <div class="ex-tags">Diario · 5–10 min</div>
+    </div>
+  </div>
+
+  <div class="trim-tip">
+    <h4>OBJETIVO REAL DE T3</h4>
+    <p>No es "ponerte fuerte." Es llegar al parto con energía, mantener movilidad y enseñarle a tu suelo pélvico a abrirse. Menos volumen, más calidad de movimiento.</p>
+  </div>
+
+  <div class="footer-brand">GABIFIT · EMBARAZO</div>
+  <div class="page-num">06</div>
+</section>
+
+<!-- ════════════ PAGE 7 — LO QUE NO HAGAS ════════════ -->
+<section class="page">
+  <div class="eyebrow">— Lo que NO hagas (importante)</div>
+  <h2 class="h2-display">
+    EJERCICIOS<br>
+    QUE <span class="accent">NUNCA</span><br>
+    DEBES HACER.
+  </h2>
+
+  <div class="avoid-grid">
+    <div class="avoid-item">
+      <div class="avoid-x">×</div>
+      <div>
+        <div class="avoid-name">Abdominales tradicionales (crunches)</div>
+        <div class="avoid-why">Aumentan el riesgo de diástasis abdominal. La separación del recto abdominal es uno de los problemas postparto más difíciles de revertir.</div>
+      </div>
+    </div>
+    <div class="avoid-item">
+      <div class="avoid-x">×</div>
+      <div>
+        <div class="avoid-name">Acostarse boca arriba después de semana 20</div>
+        <div class="avoid-why">Comprime la vena cava. Puede reducir flujo sanguíneo al bebé. Usa cuñas o costado izquierdo.</div>
+      </div>
+    </div>
+    <div class="avoid-item">
+      <div class="avoid-x">×</div>
+      <div>
+        <div class="avoid-name">Ejercicios con riesgo de caída</div>
+        <div class="avoid-why">Patines, montar caballo, esquí, deportes de contacto. Tu centro de gravedad cambió — tu equilibrio no es el mismo.</div>
+      </div>
+    </div>
+    <div class="avoid-item">
+      <div class="avoid-x">×</div>
+      <div>
+        <div class="avoid-name">Saltos / impacto alto / HIIT intenso</div>
+        <div class="avoid-why">Estrés en suelo pélvico ya cargado por el bebé. Acelera diástasis y prolapso.</div>
+      </div>
+    </div>
+    <div class="avoid-item">
+      <div class="avoid-x">×</div>
+      <div>
+        <div class="avoid-name">Ejercicios boca abajo</div>
+        <div class="avoid-why">Después de semana 16 aprox., evidente. La panza no lo permite y crea presión en abdomen.</div>
+      </div>
+    </div>
+    <div class="avoid-item">
+      <div class="avoid-x">×</div>
+      <div>
+        <div class="avoid-name">Cargar peso muy pesado / aguantar respiración (Valsalva)</div>
+        <div class="avoid-why">Aumenta presión intra-abdominal. Riesgo de diástasis y daño al suelo pélvico. Si no puedes hacerlo respirando normal, es mucho peso.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-brand">GABIFIT · EMBARAZO</div>
+  <div class="page-num">07</div>
+</section>
+
+<!-- ════════════ PAGE 8 — RESPIRACIÓN + SUELO PÉLVICO ════════════ -->
+<section class="page">
+  <div class="eyebrow">— Trabajo invisible</div>
+  <h2 class="h2-display">
+    LO QUE NADIE TE<br>
+    <span class="ital">EXPLICA</span> DEL<br>
+    SUELO <span class="accent">PÉLVICO</span>.
+  </h2>
+
+  <div class="body-text">
+    <p>Tu suelo pélvico es el músculo más importante del embarazo y del postparto. Sostiene al bebé, te conecta el core, controla la vejiga y participa en el parto. Si no lo entrenas — y no lo aprendes a relajar — termina con incontinencia, prolapso o un postparto muy duro.</p>
+    <p>Estas son las 2 técnicas base. Hazlas todos los días.</p>
+  </div>
+
+  <div class="rule-block">
+    <div class="rule-num">TÉCNICA 01 — RESPIRACIÓN 360°</div>
+    <div class="rule-text">Inhala expandiendo costillas, panza Y suelo pélvico hacia abajo. Exhala todo se cierra suave hacia el centro. NO aprietes a propósito. La presión interna ya hace el trabajo.</div>
+  </div>
+
+  <div class="rule-block">
+    <div class="rule-num">TÉCNICA 02 — KEGEL CONSCIENTE</div>
+    <div class="rule-text">Aprieta lento (3 segundos), aguanta (3 segundos), suelta lento y completamente (3 segundos). Lo último es lo que la mayoría hace mal — no sueltan completamente. El relajar importa más que el apretar.</div>
+  </div>
+
+  <div class="rule-block warning">
+    <div class="rule-num">SEÑAL DE QUE LO ESTÁS HACIENDO MAL</div>
+    <div class="rule-text">Si sientes que aprietas glúteos o abdomen — no es eso. Si te queda dolor lumbar — no es eso. Si te frustra porque "no sientes nada" — está bien, sigue, la consciencia se construye. Si tienes dudas, una fisio especializada es la mejor inversión que puedes hacer.</div>
+  </div>
+
+  <div class="footer-brand">GABIFIT · EMBARAZO</div>
+  <div class="page-num">08</div>
+</section>
+
+<!-- ════════════ PAGE 9 — PLAN SEMANAL SAMPLE ════════════ -->
+<section class="page">
+  <div class="eyebrow">— Cómo se ve la semana</div>
+  <h2 class="h2-display">
+    UN PLAN<br>
+    <span class="accent">REALISTA</span><br>
+    DE 7 DÍAS.
+  </h2>
+
+  <div class="body-text" style="margin-top:14px;">
+    <p>Esto es para trimestre 2, donde casi todo aplica. Para T1 baja intensidad, para T3 baja volumen.</p>
+  </div>
+
+  <table class="plan-table">
+    <thead>
+      <tr><th>DÍA</th><th>QUÉ HACER</th><th>TIEMPO</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="day">Lun</td><td>Sentadillas + remo banda + suelo pélvico + 10 min caminar</td><td>30 min</td></tr>
+      <tr><td class="day">Mar</td><td>Caminar firme + respiración 360°</td><td>30 min</td></tr>
+      <tr><td class="day">Mié</td><td>Plancha lateral + glute bridge + Kegels</td><td>25 min</td></tr>
+      <tr><td class="day">Jue</td><td>Caminar + estiramientos suaves</td><td>30 min</td></tr>
+      <tr><td class="day">Vie</td><td>Sentadillas + remo + suelo pélvico</td><td>30 min</td></tr>
+      <tr><td class="day">Sáb</td><td>Activo libre: yoga prenatal, natación, caminata larga</td><td>45 min</td></tr>
+      <tr><td class="day">Dom</td><td>Descanso. Solo respiración 360° + estiramiento</td><td>10 min</td></tr>
+    </tbody>
+  </table>
+
+  <div class="trim-tip" style="margin-top:24px;">
+    <h4>SI SOLO TIENES 3 DÍAS A LA SEMANA</h4>
+    <p>Hazlo Lun-Mié-Vie (las sesiones de fuerza). Caminar puedes meterlo en cualquier momento — antes de bañarte, mientras hablas por teléfono, después de comer. No tiene que ser "ejercicio formal".</p>
+  </div>
+
+  <div class="footer-brand">GABIFIT · EMBARAZO</div>
+  <div class="page-num">09</div>
+</section>
+
+<!-- ════════════ PAGE 10 — CTA ════════════ -->
+<section class="page cta-page">
+  <h2>¿Y AHORA<br><span class="accent">QUÉ?</span></h2>
+
+  <p>Si llegaste hasta aquí, ya sabes más que el 90% de las mamás embarazadas. Lo que viene es aplicar — todos los días, aunque sea 15 minutos.</p>
+  <p>Si quieres ir más profundo conmigo, tienes 2 caminos:</p>
+
+  <div class="cta-blocks">
+    <div class="cta-block">
+      <div class="label">→ Camino 01 — Para después del bebé</div>
+      <div class="headline">MASTERCLASS POST-PARTO ($97)</div>
+      <div class="url">8 semanas, self-paced. gabifitrd.com</div>
+    </div>
+    <div class="cta-block alt">
+      <div class="label">→ Camino 02 — Embarazo + postparto, conmigo 1:1</div>
+      <div class="headline">COACHING PERSONAL ($250/MES)</div>
+      <div class="url">Plan personalizado. Llamada gratis primero.</div>
+    </div>
+  </div>
+
+  <div class="signature">
+    UN ABRAZO,<br>
+    GABI<br>
+    <span>@GABIFITRD · GABIFITRD.COM</span>
+  </div>
+
+  <div class="footer-brand" style="color: var(--white); opacity: 0.4;">GABIFIT · EMBARAZO</div>
+  <div class="page-num" style="color: var(--white); opacity: 0.4;">10</div>
+</section>
+
+</body>
+</html>
