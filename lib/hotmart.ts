@@ -6,6 +6,7 @@ export type HotmartAction = {
   email: string;
   name: string | null;
   transaction: string | null;
+  productId: string | null; // para distinguir masterclass vs upsell de coaching
 };
 
 const GRANT_EVENTS = new Set(["PURCHASE_APPROVED", "PURCHASE_COMPLETE"]);
@@ -43,13 +44,18 @@ export function parseHotmartEvent(body: any): HotmartAction | null {
 
   const buyer = body?.data?.buyer ?? {};
   const purchase = body?.data?.purchase ?? {};
+  const product = body?.data?.product ?? {};
   const email = String(buyer.email ?? "").trim().toLowerCase();
   if (!email) return null;
+
+  // Hotmart puede mandar el id del producto como id o ucode.
+  const rawProductId = product.id ?? product.ucode ?? null;
 
   return {
     action,
     email,
     name: buyer.name ? String(buyer.name) : null,
     transaction: purchase.transaction ? String(purchase.transaction) : null,
+    productId: rawProductId != null ? String(rawProductId) : null,
   };
 }

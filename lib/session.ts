@@ -1,5 +1,6 @@
 import { cookies } from "next/headers";
 import { adminAuth, adminDb } from "@/lib/firebase/admin";
+import type { CoachingStatus } from "@/lib/coaching";
 
 export const SESSION_COOKIE = "gabifit_session";
 export const SESSION_MAX_AGE = 14 * 24 * 60 * 60; // 14 días, en segundos
@@ -11,6 +12,9 @@ export type Member = {
   whatsapp: string | null;
   status: "active" | "pending" | "revoked";
   isAdmin: boolean;
+  // Entitlement del upsell de coaching, en paralelo a `status` (masterclass).
+  // null = nunca compró/recibió coaching. La masterclass ignora este campo.
+  coachingStatus: CoachingStatus | null;
 };
 
 // Lee la cookie, la verifica con Firebase Admin y devuelve la miembra con
@@ -31,6 +35,7 @@ export async function getSessionMemberAny(): Promise<Member | null> {
       whatsapp: m.whatsapp ?? null,
       status: m.status,
       isAdmin: Boolean(m.isAdmin),
+      coachingStatus: (m.coachingStatus as CoachingStatus | undefined) ?? null,
     };
   } catch {
     return null;
@@ -42,5 +47,13 @@ export async function getSessionMemberAny(): Promise<Member | null> {
 export async function getSessionMember(): Promise<Member | null> {
   const member = await getSessionMemberAny();
   if (!member || member.status !== "active") return null;
+  return member;
+}
+
+// Solo clientas con coaching ACTIVO. Contrato usado por /coaching y sus APIs.
+// Independiente de `status`: una clienta puede tener coaching sin masterclass.
+export async function getCoachingClient(): Promise<Member | null> {
+  const member = await getSessionMemberAny();
+  if (!member || member.coachingStatus !== "active") return null;
   return member;
 }

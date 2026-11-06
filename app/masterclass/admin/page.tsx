@@ -1,20 +1,17 @@
-import { notFound } from "next/navigation";
-import { getSessionMemberAny } from "@/lib/session";
-import { getPendingMembers, getAllMembers } from "@/lib/members-db";
-import { getClientLessons } from "@/lib/lessons-db";
-import AdminPanel from "./AdminPanel";
+import { getCoachingClients, getAnnouncement } from "@/lib/coaching-db";
+import { isoDate } from "@/lib/coaching";
+import CoachingDashboard from "./CoachingDashboard";
 
 export const dynamic = "force-dynamic";
 
-export default async function AdminPage() {
-  const me = await getSessionMemberAny();
-  if (!me || !me.isAdmin) notFound();
-
-  const [pending, members, lessons] = await Promise.all([
-    getPendingMembers(),
-    getAllMembers(),
-    getClientLessons(),
+// Inicio del panel: día a día del coaching (el gate isAdmin lo hace el layout).
+export default async function AdminHomePage() {
+  const [clients, announcement] = await Promise.all([
+    getCoachingClients(),
+    getAnnouncement(),
   ]);
 
-  return <AdminPanel pending={pending} members={members} totalLessons={lessons.length} />;
+  return (
+    <CoachingDashboard clients={clients} today={isoDate(new Date())} announcement={announcement} />
+  );
 }

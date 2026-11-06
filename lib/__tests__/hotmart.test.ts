@@ -27,7 +27,20 @@ describe("parseHotmartEvent", () => {
       email: "ana@mail.com",
       name: "Ana",
       transaction: "HP123",
+      productId: null,
     });
+  });
+
+  it("extrae el id de producto (para distinguir el upsell de coaching)", () => {
+    const withProduct = {
+      event: "PURCHASE_APPROVED",
+      data: {
+        buyer: { email: "ana@mail.com", name: "Ana" },
+        purchase: { transaction: "HP123" },
+        product: { id: 998877 },
+      },
+    };
+    expect(parseHotmartEvent(withProduct)?.productId).toBe("998877");
   });
 
   it("mapea reembolso/chargeback/cancelación a revoke", () => {
