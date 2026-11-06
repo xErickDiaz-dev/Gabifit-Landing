@@ -479,15 +479,14 @@ export default function GabifitLanding() {
                 playsInline
                 preload="metadata"
                 className="w-full h-auto block"
-                poster=""
               >
-                <source src="/testimonios/elaine-zapata.mp4" type="video/mp4" />
+                <source src="https://storage.googleapis.com/gabifitrd.firebasestorage.app/web/testimonio-elaine-zapata-04d10fbf.mp4" type="video/mp4" />
               </video>
             </div>
             <div className="border-l-4 border-brand-purple pl-6">
               <blockquote className="text-lg md:text-xl font-mono normal-case italic opacity-90 leading-relaxed mb-4">
-                {/* TODO: Agrega aquí la mejor frase que dijo Elaine */}
-                &ldquo;[Tu mejor frase aquí — cuéntame qué dijo Elaine y lo pongo]&rdquo;
+                &ldquo;Antes de entrenar con ella no me sentía tan capaz, no sentía que tenía esa
+                disciplina y esa constancia — hasta que comencé a entrenar con ella. Vi que sí pude.&rdquo;
               </blockquote>
               <p className="font-heading text-brand-purple text-xl">ELAINE ZAPATA</p>
               <p className="font-mono text-sm opacity-60 normal-case">Clienta Gabifit · Santo Domingo</p>
