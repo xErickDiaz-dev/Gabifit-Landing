@@ -1,27 +1,6 @@
 import type { Metadata } from "next";
-import { Oswald, Roboto_Mono, Space_Grotesk } from "next/font/google";
+import { oswald, robotoMono, spaceGrotesk } from "./fonts";
 import "./globals.css";
-
-const oswald = Oswald({
-  subsets: ["latin"],
-  weight: ["700"],
-  variable: "--font-oswald",
-  display: "swap",
-});
-
-const robotoMono = Roboto_Mono({
-  subsets: ["latin"],
-  weight: ["400", "700"],
-  variable: "--font-roboto-mono",
-  display: "swap",
-});
-
-const spaceGrotesk = Space_Grotesk({
-  subsets: ["latin"],
-  weight: ["400", "700"],
-  variable: "--font-space-grotesk",
-  display: "swap",
-});
 
 export const metadata: Metadata = {
   title: "Gabifit | Recuperación Post-Parto Real",
